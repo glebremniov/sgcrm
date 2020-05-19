@@ -71,11 +71,17 @@ export default {
                     setAuthenticated(value);
                     if (value) {
                         setRole(this.getRole())
+                    } else {
+                        setRole(RoleService.anonymous())
                     }
                 })
-                .catch(() => setAuthenticated(false))
+                .catch(() => {
+                    setAuthenticated(false);
+                    setRole(RoleService.anonymous());
+                })
         } else {
             setAuthenticated(false)
+            setRole(RoleService.anonymous())
         }
     },
 
