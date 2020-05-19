@@ -14,7 +14,6 @@ const _PATH_DATA = {
         roles: [
             RoleService.admin(),
             RoleService.manager(),
-            RoleService.anonymous(),
         ],
     },
     OPERATIONS: {
@@ -22,7 +21,13 @@ const _PATH_DATA = {
         roles: [
             RoleService.admin(),
             RoleService.manager(),
-            RoleService.anonymous(),
+        ],
+    },
+    WORKERS: {
+        path: "/workers/",
+        roles: [
+            RoleService.admin(),
+            RoleService.manager(),
         ],
     },
     SETTINGS: {
@@ -37,7 +42,6 @@ const _PATH_DATA = {
         roles: [
             RoleService.admin(),
             RoleService.manager(),
-            RoleService.anonymous(),
         ],
     },
 }
@@ -50,12 +54,16 @@ export default {
     home: () => _PATH_DATA.HOME.path,
     clients: () => _PATH_DATA.CLIENTS.path,
     operations: () => _PATH_DATA.OPERATIONS.path,
+    workers: () => _PATH_DATA.WORKERS.path,
     settings: () => _PATH_DATA.SETTINGS.path,
     login: () => _PATH_DATA.LOGIN.path,
 
     roles: () => {
         return {
             home: () => _PATH_DATA.HOME.roles,
+            clients: () => _PATH_DATA.CLIENTS.roles,
+            operations: () => _PATH_DATA.OPERATIONS.roles,
+            workers: () => _PATH_DATA.WORKERS.roles,
             settings: () => _PATH_DATA.SETTINGS.roles,
             login: () => _PATH_DATA.LOGIN.roles,
         }

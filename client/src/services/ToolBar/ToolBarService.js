@@ -1,4 +1,4 @@
-import {faBox, faCog, faHome, faSignOutAlt, faWallet} from "@fortawesome/free-solid-svg-icons";
+import {faBox, faCog, faHome, faSignOutAlt, faUserTie, faWallet} from "@fortawesome/free-solid-svg-icons";
 import PathService from "../Path/PathService";
 import RoleService from "../Role/RoleService";
 
@@ -17,7 +17,8 @@ export default class ToolBarService {
         const ids = {
             HOME: 'home',
             CLIENTS: 'clients',
-            OPERATIONS: 'operations'
+            OPERATIONS: 'operations',
+            WORKERS: 'workers',
         }
 
         const items = [
@@ -39,15 +40,29 @@ export default class ToolBarService {
                 href: PathService.operations(),
                 faIcon: faBox,
             },
+            {
+                id: ids.WORKERS,
+                label: 'Сотрудники',
+                href: PathService.workers(),
+                faIcon: faUserTie,
+            },
         ];
 
         switch (role) {
             case RoleService.admin():
-                return this.filterItemsByIds(items, ids.HOME)
+                return this.filterItemsByIds(items,
+                    ids.HOME,
+                    ids.CLIENTS,
+                    ids.OPERATIONS,
+                    ids.WORKERS)
             case RoleService.manager():
-                return this.filterItemsByIds(items, ids.HOME)
+                return this.filterItemsByIds(items,
+                    ids.HOME,
+                    ids.CLIENTS,
+                    ids.OPERATIONS)
             case RoleService.anonymous():
-                return this.filterItemsByIds(items, ids.HOME, ids.CLIENTS, ids.OPERATIONS)
+                return this.filterItemsByIds(items,
+                    ids.HOME)
             default:
                 return []
         }
