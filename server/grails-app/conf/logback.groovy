@@ -34,4 +34,13 @@ if (Environment.isDevelopmentMode() && targetDir != null) {
     }
     logger("StackTrace", ERROR, ['FULL_STACKTRACE'], false)
 }
-root(ERROR, ['STDOUT'])
+// logger("org.hibernate.SQL", DEBUG, ['SQL_APPENDER'], false) // log statements
+// logger("org.hibernate.type.descriptor.sql.BasicBinder", TRACE, ['SQL_APPENDER'], false) // log parameters
+
+logger('org.springframework', INFO)
+logger('org.hibernate', INFO)
+logger('org.grails', INFO)
+logger('grails', INFO)
+logger('io.micronaut', INFO)
+
+root(DEBUG, ['STDOUT'])
