@@ -1,0 +1,16 @@
+.vertical-menu {
+    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    width: var(--toolBar-width);
+    height: 100vh;
+    background-color: var(--color-0);
+    color: var(--color-1);
+}
+
+.vertical-menu .bottom-container {
+    position: fixed;
+    bottom: 0;
+    width: var(--toolBar-width);
+}
