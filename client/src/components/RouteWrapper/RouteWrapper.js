@@ -4,12 +4,27 @@ import {UserDetailsContext} from "../../contexts/UserDetailsContext";
 
 const RouteWrapper = ({children, roles, loginPathname, ...rest}) => {
 
-    const {role} = useContext(UserDetailsContext)
+    const userDetails = useContext(UserDetailsContext)
 
     const isRoleAppropriate = (role, roles) => roles.includes(role);
 
-    return isRoleAppropriate(role, roles) ?
-        <Route {...rest} render={() => children}/> : <Redirect to={loginPathname}/>
+    return (
+        <Route
+            {...rest}
+            render={({location}) =>
+                isRoleAppropriate(userDetails.role, roles) ? (
+                    children
+                ) : (
+                    <Redirect
+                        to={{
+                            pathname: "/login",
+                            state: {from: location}
+                        }}
+                    />
+                )
+            }
+        />
+    );
 
 };
 

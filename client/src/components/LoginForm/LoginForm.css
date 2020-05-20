@@ -1,3 +1,4 @@
 .login-form {
-
+    padding: 3.5rem;
+    border-radius: var(--main-border-radius-d);
 }

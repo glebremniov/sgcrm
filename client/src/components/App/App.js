@@ -9,6 +9,7 @@ import Panel from "../Panel/Panel";
 import AuthService from "../../services/Auth/AuthService";
 import RouteWrapper from "../RouteWrapper/RouteWrapper";
 import PathService from "../../services/Path/PathService";
+import LoginForm from "../LoginForm/LoginForm";
 
 const App = () => {
 
@@ -21,16 +22,16 @@ const App = () => {
                 setUserDetails({...userDetails, role})
             }
         }
-        
+
         AuthService.checkAuthentication(setAuthenticated, setUserRole)
 
-    }, [userDetails] )
+    }, [userDetails])
 
     return (
         <div className="app">
             <UserDetailsContext.Provider value={{
                 username: userDetails.username,
-                userRole: userDetails.userRole
+                role: userDetails.role
             }}>
                 <BrowserRouter>
 
@@ -46,22 +47,27 @@ const App = () => {
 
                     <Panel>
 
+                        <RouteWrapper path={PathService.login()}
+                                      roles={PathService.roles().login()}>
+                            <LoginForm/>
+                        </RouteWrapper>
+
                         <RouteWrapper path={PathService.home()} exact
-                            roles={PathService.roles().home()}>
+                                      roles={PathService.roles().home()}>
                             <DefaultPage>
                                 Главная
                             </DefaultPage>
                         </RouteWrapper>
 
                         <RouteWrapper path={PathService.clients()}
-                            roles={PathService.roles().clients()}>
+                                      roles={PathService.roles().clients()}>
                             <DefaultPage>
                                 Clients
                             </DefaultPage>
                         </RouteWrapper>
 
                         <RouteWrapper path={PathService.operations()}
-                            roles={PathService.roles().operations()}>
+                                      roles={PathService.roles().operations()}>
                             <DefaultPage>
                                 Operations
                             </DefaultPage>
@@ -71,6 +77,13 @@ const App = () => {
                                       roles={PathService.roles().workers()}>
                             <DefaultPage>
                                 Workers
+                            </DefaultPage>
+                        </RouteWrapper>
+
+                        <RouteWrapper path={PathService.settings()}
+                                      roles={PathService.roles().settings()}>
+                            <DefaultPage>
+                                Settings
                             </DefaultPage>
                         </RouteWrapper>
 

@@ -42,6 +42,7 @@ const _PATH_DATA = {
         roles: [
             RoleService.admin(),
             RoleService.manager(),
+            RoleService.anonymous(),
         ],
     },
 }
