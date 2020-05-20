@@ -38,6 +38,12 @@ const App = () => {
         AuthService.login(userDetails)
     }
 
+    const onLogout = () => {
+        AuthService.removeToken();
+        setAuthenticated(false)
+        setUserDetails(AppService.getInitialUserDetails())
+    };
+
     return (
         <div className="app">
             <UserDetailsContext.Provider value={{
@@ -52,8 +58,7 @@ const App = () => {
                         {
                             name: 'sgcrm'
                         },
-                        () => {
-                        },
+                        onLogout,
                     )}/>
 
                     <Panel>

@@ -17,6 +17,7 @@ export default {
             logOutItemProps,
             topItems,
             bottomItems,
+            isAuthenticated,
             statusBarProps: {
                 appInfo,
             },
