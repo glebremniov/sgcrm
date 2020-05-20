@@ -27,6 +27,17 @@ const App = () => {
 
     }, [userDetails])
 
+    const onLoginFormInputChange = ({target}) => {
+        const newUserDetails = {...userDetails}
+        newUserDetails[target.name] = target.value
+        setUserDetails(newUserDetails)
+    }
+
+    const onLoginFormSubmit = (event) => {
+        event.preventDefault()
+        AuthService.login(userDetails)
+    }
+
     return (
         <div className="app">
             <UserDetailsContext.Provider value={{
@@ -49,7 +60,12 @@ const App = () => {
 
                         <RouteWrapper path={PathService.login()}
                                       roles={PathService.roles().login()}>
-                            <LoginForm/>
+                            <LoginForm
+                                title="Авторизация"
+                                userDetails={userDetails}
+                                onSubmit={onLoginFormSubmit}
+                                onInputChange={onLoginFormInputChange}
+                            />
                         </RouteWrapper>
 
                         <RouteWrapper path={PathService.home()} exact

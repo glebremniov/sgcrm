@@ -2,11 +2,15 @@ import React from "react";
 import "./LoginForm.css";
 import DefaultPage from "../DefaultPage/DefaultPage";
 import {Button, Form} from "react-bootstrap";
+import {Link} from "react-router-dom";
 
 const LoginForm = (props) => {
     const {
         title,
-        onSubmit
+        onSubmit,
+        recoverPasswordPathname,
+        userDetails,
+        onInputChange
     } = props;
 
     return (
@@ -19,6 +23,9 @@ const LoginForm = (props) => {
                         <Form.Label>Введите имя пользователя:</Form.Label>
                         <Form.Control type="text"
                                       name="username"
+                                      value={userDetails.username}
+                                      onChange={onInputChange}
+                                      autoComplete="username"
                                       placeholder="Имя пользователя"/>
                         <Form.Text className="text-muted">
                             We'll never share your email with anyone else.
@@ -29,10 +36,17 @@ const LoginForm = (props) => {
                         <Form.Label>Введите пароль:</Form.Label>
                         <Form.Control type="password"
                                       name="password"
+                                      value={userDetails.password}
+                                      onChange={onInputChange}
+                                      autoComplete="current-password"
                                       placeholder="Пароль"/>
+                        <Form.Text>
+                            <Link to={recoverPasswordPathname}>Забыли пароль?</Link>
+                        </Form.Text>
                     </Form.Group>
+
                     <Button variant="primary" type="submit">
-                        Submit
+                        Подтвердить
                     </Button>
                 </Form>
             </div>
@@ -42,7 +56,13 @@ const LoginForm = (props) => {
 
 LoginForm.defaultProps = {
     title: 'Login form',
-    onSubmit: (e) => e.preventDefault()
+    onSubmit: (e) => e.preventDefault(),
+    recoverPasswordPathname: '/recoverPassword',
+    userDetails: {
+        username: '',
+        password: ''
+    },
+    onInputChange: () => {}
 }
 
 export default LoginForm
