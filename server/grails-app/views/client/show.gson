@@ -1,7 +1,7 @@
 import client.Client
 
 model {
-	Client client
+    Client client
 }
 
 json tmpl.client(client)

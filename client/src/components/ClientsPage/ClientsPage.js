@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from "react";
 import "./ClientsPage.css";
 import DefaultPage from "../DefaultPage/DefaultPage";
-import {Card} from "react-bootstrap";
 import ClientCard from "../ClientCard/ClientCard";
+import Loader from "../Loader/Loader";
 
 const ClientsPage = (props) => {
 
@@ -30,7 +30,7 @@ const ClientsPage = (props) => {
     }, [getData])
 
     if (!hasLoaded) {
-        return "Loading"
+        return <Loader/>
     }
 
     if (hasError) {

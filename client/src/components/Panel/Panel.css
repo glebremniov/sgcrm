@@ -1,6 +1,6 @@
 .panel {
-    color: var(--main-dark-color);
-    margin-left: var( --toolBar-width);
+    /*color: var(--main-dark-color);*/
+    margin-left: var(--toolBar-width);
 }
 
 .panel .panel-title {

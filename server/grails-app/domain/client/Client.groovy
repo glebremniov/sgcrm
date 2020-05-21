@@ -4,8 +4,6 @@ import enums.client.ClientType
 import enums.client.CustomerPriority
 import enums.client.DiscountPriority
 import grails.compiler.GrailsCompileStatic
-import grails.plugin.springsecurity.annotation.Secured
-import grails.rest.Resource
 
 @GrailsCompileStatic
 class Client {

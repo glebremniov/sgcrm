@@ -1,6 +1,6 @@
 .status-bar {
-    background: var(--color-1);
-    color: var(--main-white-color);
+    background: var(--purple);
+    color: var(--gray);
     font-size: .9rem;
     padding: 0 1rem;
     width: 100%;

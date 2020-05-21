@@ -1,47 +1,28 @@
 .tool-bar-item {
-    color: var(--color-1);
+    color: var(--white);
     font-weight: bold;
     display: block;
     padding: 1rem;
     margin: 1.25rem 2rem;
     transition-duration: var(--main-transition-durirtion);
+    border-radius: var(--main-border-radius-d);
 }
 
 .tool-bar-item:hover {
     text-decoration: inherit;
-    color: var(--color-5);
+    color: var(--light);
 }
 
-.tool-bar-item:focus {
-    outline: none;
-    color: var(--color-5);
-    text-decoration: none;
+.tool-bar-item.active {
+    background: var(--secondary);
 }
 
 .tool-bar-item svg {
     margin-right: .5rem;
-}
-
-.tool-bar-item.active:hover {
-    color: var(--color-5);
-}
-
-.tool-bar-item svg {
-    transition-duration: var(--main-transition-durirtion);
+    color: var(--orange);
     opacity: .25;
 }
 
 .tool-bar-item.active svg {
-    color: var(--color-4);
-    opacity: 1;
-}
-
-.tool-bar-item:focus svg {
-    color: var(--color-4);
-    opacity: 1;
-}
-
-.tool-bar-item:hover svg {
-    color: var(--color-4);
     opacity: 1;
 }

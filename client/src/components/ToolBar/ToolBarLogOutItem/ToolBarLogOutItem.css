@@ -1,8 +1,12 @@
 .tool-bar-log-out-item {
     cursor: pointer;
-    color: var(--color-4);
+}
+
+.tool-bar-log-out-item svg {
+    opacity: 1;
+    color: var(--danger);
 }
 
 .tool-bar-log-out-item:hover {
-    color: var(--color-4);
+    /*color: var(--danger);*/
 }

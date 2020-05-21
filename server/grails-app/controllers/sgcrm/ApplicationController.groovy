@@ -2,7 +2,8 @@ package sgcrm
 
 import grails.core.GrailsApplication
 import grails.plugin.springsecurity.annotation.Secured
-import grails.plugins.*
+import grails.plugins.GrailsPluginManager
+import grails.plugins.PluginManagerAware
 import org.springframework.http.HttpStatus
 
 class ApplicationController implements PluginManagerAware {
