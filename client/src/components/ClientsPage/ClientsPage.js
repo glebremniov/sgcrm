@@ -3,6 +3,7 @@ import "./ClientsPage.css";
 import DefaultPage from "../DefaultPage/DefaultPage";
 import ClientCard from "../ClientCard/ClientCard";
 import Loader from "../Loader/Loader";
+import RowDataTransformer from "../RowDataContainer/RowDataTransformer";
 
 const ClientsPage = (props) => {
 
@@ -47,11 +48,7 @@ const ClientsPage = (props) => {
                     <h2>{title}</h2>
                 </div>
 
-                <div className="card-wrapper">
-                    {
-                        data.map(it => <ClientCard data={it}/>)
-                    }
-                </div>
+                <RowDataTransformer dataArr={data} CardComponent={ClientCard}/>
 
             </div>
         </DefaultPage>

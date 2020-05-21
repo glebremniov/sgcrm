@@ -1,11 +1,14 @@
 import React from "react";
 import "./ClientCard.css";
 
-const ClientCard = ({data}) => {
+const ClientCard = (props) => {
+    const {
+        shortName
+    } = props
     return (
         <div className="client-card shadow">
             <div className="title">
-                <h4>{data.shortName}</h4>
+                <h4>{shortName}</h4>
             </div>
         </div>
     )

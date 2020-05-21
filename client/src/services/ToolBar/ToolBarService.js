@@ -1,4 +1,12 @@
-import {faBox, faCog, faHome, faSignOutAlt, faUserTie, faWallet} from "@fortawesome/free-solid-svg-icons";
+import {
+    faBox,
+    faCalendarAlt,
+    faCog,
+    faHome,
+    faSignOutAlt,
+    faUserTie,
+    faWallet
+} from "@fortawesome/free-solid-svg-icons";
 import PathService from "../Path/PathService";
 import RoleService from "../Role/RoleService";
 
@@ -19,6 +27,7 @@ export default class ToolBarService {
             CLIENTS: 'clients',
             OPERATIONS: 'operations',
             WORKERS: 'workers',
+            CALENDAR: 'calendar',
         }
 
         const items = [
@@ -46,6 +55,12 @@ export default class ToolBarService {
                 href: PathService.workers(),
                 faIcon: faUserTie,
             },
+            {
+                id: ids.CALENDAR,
+                label: 'Календарь',
+                href: PathService.calendar(),
+                faIcon: faCalendarAlt,
+            },
         ];
 
         switch (role) {
@@ -59,6 +74,7 @@ export default class ToolBarService {
                 return this.filterItemsByIds(items,
                     ids.HOME,
                     ids.CLIENTS,
+                    ids.CALENDAR,
                     ids.OPERATIONS)
             case RoleService.anonymous():
                 return this.filterItemsByIds(items,

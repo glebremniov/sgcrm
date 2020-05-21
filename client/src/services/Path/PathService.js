@@ -30,6 +30,13 @@ const _PATH_DATA = {
             RoleService.manager(),
         ],
     },
+    CALENDAR: {
+        path: "/calendar/",
+        roles: [
+            RoleService.admin(),
+            RoleService.manager()
+        ]
+    },
     SETTINGS: {
         path: "/settings",
         roles: [
@@ -56,6 +63,7 @@ export default {
     clients: () => _PATH_DATA.CLIENTS.path,
     operations: () => _PATH_DATA.OPERATIONS.path,
     workers: () => _PATH_DATA.WORKERS.path,
+    calendar: () => _PATH_DATA.WORKERS.path,
     settings: () => _PATH_DATA.SETTINGS.path,
     login: () => _PATH_DATA.LOGIN.path,
 
@@ -65,6 +73,7 @@ export default {
             clients: () => _PATH_DATA.CLIENTS.roles,
             operations: () => _PATH_DATA.OPERATIONS.roles,
             workers: () => _PATH_DATA.WORKERS.roles,
+            calendar: () => _PATH_DATA.WORKERS.roles,
             settings: () => _PATH_DATA.SETTINGS.roles,
             login: () => _PATH_DATA.LOGIN.roles,
         }

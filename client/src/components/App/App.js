@@ -13,6 +13,7 @@ import LoginForm from "../LoginForm/LoginForm";
 import ClientsPage from "../ClientsPage/ClientsPage";
 import ApiService from "../../services/Api/ApiService";
 import {CLIENT_VERSION} from "../../config/config";
+import HomePage from "../HomePage/HomePage";
 
 const App = () => {
 
@@ -79,9 +80,7 @@ const App = () => {
 
                         <RouteWrapper path={PathService.home()} exact
                                       roles={PathService.roles().home()}>
-                            <DefaultPage>
-                                Главная
-                            </DefaultPage>
+                            <HomePage title="Главная"/>
                         </RouteWrapper>
 
                         <RouteWrapper path={PathService.clients()}
