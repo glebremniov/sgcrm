@@ -40,6 +40,10 @@ export default {
             login: '/api/login',
             refreshToken: '/oauth/access_token'
         }
+    },
+
+    getClients() {
+        return _getResource(buildUri('/api/client'))
     }
 };
 

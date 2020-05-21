@@ -10,6 +10,8 @@ import AuthService from "../../services/Auth/AuthService";
 import RouteWrapper from "../RouteWrapper/RouteWrapper";
 import PathService from "../../services/Path/PathService";
 import LoginForm from "../LoginForm/LoginForm";
+import ClientsPage from "../ClientsPage/ClientsPage";
+import ApiService from "../../services/Api/ApiService";
 
 const App = () => {
 
@@ -82,9 +84,9 @@ const App = () => {
 
                         <RouteWrapper path={PathService.clients()}
                                       roles={PathService.roles().clients()}>
-                            <DefaultPage>
-                                Clients
-                            </DefaultPage>
+                            <ClientsPage
+                                getData={ApiService.getClients}
+                            />
                         </RouteWrapper>
 
                         <RouteWrapper path={PathService.operations()}

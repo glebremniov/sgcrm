@@ -1,5 +1,7 @@
 package sgcrm
 
+import client.Client
+import enums.client.ClientType
 import grails.gorm.transactions.Transactional
 import security.Role
 import security.User
@@ -13,6 +15,7 @@ class BootStrap {
         log.info "Loading database..."
 
         initSecurity()
+        initClients()
 
         log.debug("Users count: ${User.count}")
         log.debug("Roles count: ${Role.count}")
@@ -32,6 +35,24 @@ class BootStrap {
 
         UserRole.create(adminUser, adminRole, true)
         UserRole.create(managerUser, managerRole, true)
+    }
+
+    @Transactional
+    private initClients() {
+
+        def client1 = new Client(
+                responsiblePerson: 'Директор',
+                clientType: ClientType.ENTITY,
+                fullName: "Сообщество с ограниченной ответственностью Белабат",
+                shortName: "СООО Белабат",
+                phone: "+375 17 337 37 00",
+                fax: "+375 17 337 37 00",
+                email: "aliaksei.prakopchyk@abat.de",
+                postCode: "220017",
+                state: "Минск",
+                street: "пр-т Притыцкого",
+                buildingsNumber: "156"
+        ).save(FAIL_ON_ERROR)
     }
 
     def destroy = {
