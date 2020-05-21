@@ -8,6 +8,9 @@ import grails.compiler.GrailsCompileStatic
 @GrailsCompileStatic
 class Client {
 
+    String payerAccountNumber
+    String bankIdentificationCode
+
     String responsiblePerson
 
     ClientType clientType
@@ -30,6 +33,7 @@ class Client {
     DiscountPriority discountPriority = DiscountPriority.ZERO
 
     static constraints = {
-
+        payerAccountNumber nullable: true, blank: false, size: 9..9, unique: true
+        bankIdentificationCode nullable: true, blank: false, size: 9..9, unique: true
     }
 }

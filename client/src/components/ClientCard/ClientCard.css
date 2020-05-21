@@ -4,21 +4,28 @@
     transition-duration: var(--main-transition-durirtion);
     border-radius: var(--main-border-radius-d);
     cursor: pointer;
+    border: .3rem solid var(--white);
 }
 
 .client-card .body {
-    margin-bottom: 2rem;
+    margin: 1rem 0;
+    color: var(--gray);
 }
 
-.client-card .dates {
-    color: var(--main-l-grey-color);
-    font-size: .9rem;
+.client-card .body .item {
+    margin-bottom: .2rem;
+    font-weight: 500;
+}
+
+.client-card .body .item:last-child {
+    margin-bottom: 0;
 }
 
 .client-card:last-child {
     margin-bottom: 0;
 }
 
-.client-card h4:hover {
+.client-card:hover {
+    border: .3rem solid var(--orange);
     /*color: var(--main-color-7);*/
 }
