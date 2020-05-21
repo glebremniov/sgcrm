@@ -16,7 +16,10 @@ const LoginForm = (props) => {
     return (
         <DefaultPage>
             <div className="login-form shadow">
-                <h2>{title}</h2>
+
+                <div className="title">
+                    <h2>{title}</h2>
+                </div>
 
                 <Form onSubmit={onSubmit}>
                     <Form.Group controlId="username">
@@ -28,7 +31,7 @@ const LoginForm = (props) => {
                                       autoComplete="username"
                                       placeholder="Имя пользователя"/>
                         <Form.Text className="text-muted">
-                            We'll never share your email with anyone else.
+                            Мы заботимся о конфеденциальности Ваших данных.
                         </Form.Text>
                     </Form.Group>
 
@@ -62,7 +65,8 @@ LoginForm.defaultProps = {
         username: '',
         password: ''
     },
-    onInputChange: () => {}
+    onInputChange: () => {
+    }
 }
 
 export default LoginForm
