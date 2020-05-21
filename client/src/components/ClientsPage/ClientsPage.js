@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from "react";
 import "./ClientsPage.css";
 import DefaultPage from "../DefaultPage/DefaultPage";
-import {Table} from "react-bootstrap";
+import {Card} from "react-bootstrap";
+import ClientCard from "../ClientCard/ClientCard";
 
 const ClientsPage = (props) => {
 
@@ -46,7 +47,11 @@ const ClientsPage = (props) => {
                     <h2>{title}</h2>
                 </div>
 
-                <ClientsTable data={data}/>
+                <div className="card-wrapper">
+                    {
+                        data.map(it => <ClientCard data={it}/>)
+                    }
+                </div>
 
             </div>
         </DefaultPage>
@@ -63,54 +68,4 @@ ClientsPage.defaultProps = {
 
 export default ClientsPage
 
-const ClientsTable = ({data = []}) => {
 
-    const getTableHeader = () => {
-        if (data.length > 0) {
-
-            const keyToLabel = (key) => {
-                const keyToLabelMapping = {
-                    id: '#',
-                    name: 'Название'
-                }
-
-                if (keyToLabelMapping.hasOwnProperty(key)) {
-                    return keyToLabelMapping[key]
-                } else {
-                    console.error('Couldn\'t find a label for key:', key)
-                    return key
-                }
-            }
-
-            const headerData = Object.keys(data[0]).map(keyToLabel)
-
-            return (
-                <thead>
-                    <tr>
-                        {
-                            headerData.map((it, i) => (
-                                <th key={`th-${i}`}>
-                                    {
-                                        it
-                                    }
-                                </th>
-                            ))
-                        }
-                    </tr>
-                </thead>
-            )
-        }
-
-        return "No data"
-    }
-
-    return (
-        <div className="clients-table">
-            <Table striped bordered hover responsive>
-                {
-                    getTableHeader()
-                }
-            </Table>
-        </div>
-    )
-}

@@ -1,0 +1,7 @@
+import client.Client
+
+model {
+	Client client
+}
+
+json g.render(client, [resolveTemplate: false])

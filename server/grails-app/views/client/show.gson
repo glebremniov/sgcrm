@@ -1,0 +1,7 @@
+import client.Client
+
+model {
+	Client client
+}
+
+json tmpl.client(client)

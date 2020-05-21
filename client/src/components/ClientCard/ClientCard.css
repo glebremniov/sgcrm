@@ -1,0 +1,24 @@
+.client-card {
+    margin: 2rem 0;
+    padding: 2rem;
+    transition-duration: var(--main-transition-durirtion);
+    border-radius: var(--main-border-radius-d);
+    cursor: pointer;
+}
+
+.client-card .body {
+    margin-bottom: 2rem;
+}
+
+.client-card .dates {
+    color: var(--main-l-grey-color);
+    font-size: .9rem;
+}
+
+.client-card:last-child {
+    margin-bottom: 0;
+}
+
+.client-card h4:hover {
+    color: var(--main-color-7);
+}

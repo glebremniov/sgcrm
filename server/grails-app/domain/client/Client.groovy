@@ -7,9 +7,7 @@ import grails.compiler.GrailsCompileStatic
 import grails.plugin.springsecurity.annotation.Secured
 import grails.rest.Resource
 
-@Resource(uri = '/api/client')
 @GrailsCompileStatic
-@Secured(['ROLE_ADMIN', 'ROLE_MANAGER'])
 class Client {
 
     String responsiblePerson
