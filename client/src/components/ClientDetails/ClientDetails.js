@@ -3,17 +3,19 @@ import "./ClientDetails..css";
 import DefaultPage from "../DefaultPage/DefaultPage";
 
 const ClientDetails = (props) => {
-
     const {
-        title,
         data
     } = props
+
+    const {
+        shortName
+    } = data
 
     return (
         <DefaultPage>
             <div className="client-details">
                 <div className="title">
-                    <h3>{title}</h3>
+                    <h3>{shortName}</h3>
                 </div>
             </div>
         </DefaultPage>

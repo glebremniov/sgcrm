@@ -16,6 +16,13 @@ const _PATH_DATA = {
             RoleService.manager(),
         ],
     },
+    CLIENT: {
+        path: "/clients/:id",
+        roles: [
+            RoleService.admin(),
+            RoleService.manager(),
+        ],
+    },
     OPERATIONS: {
         path: "/operations/",
         roles: [
@@ -61,6 +68,7 @@ const _isPathExists = path =>
 export default {
     home: () => _PATH_DATA.HOME.path,
     clients: () => _PATH_DATA.CLIENTS.path,
+    client: () => _PATH_DATA.CLIENT.path,
     operations: () => _PATH_DATA.OPERATIONS.path,
     workers: () => _PATH_DATA.WORKERS.path,
     calendar: () => _PATH_DATA.WORKERS.path,
@@ -71,6 +79,7 @@ export default {
         return {
             home: () => _PATH_DATA.HOME.roles,
             clients: () => _PATH_DATA.CLIENTS.roles,
+            client: () => _PATH_DATA.CLIENTS.roles,
             operations: () => _PATH_DATA.OPERATIONS.roles,
             workers: () => _PATH_DATA.WORKERS.roles,
             calendar: () => _PATH_DATA.WORKERS.roles,

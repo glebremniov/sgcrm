@@ -15,6 +15,8 @@ import ApiService from "../../services/Api/ApiService";
 import {CLIENT_VERSION} from "../../config/config";
 import HomePage from "../HomePage/HomePage";
 import WithDataWrapper from "../WithDataWrapper/WithDataWrapper";
+import {Switch} from "react-bootstrap";
+import ClientDetails from "../ClientDetails/ClientDetails";
 
 const App = () => {
 
@@ -72,52 +74,64 @@ const App = () => {
                     )}/>
 
                     <Panel>
+                        <Switch>
 
-                        <RouteWrapper path={PathService.login()}
-                                      roles={PathService.roles().login()}>
-                            <LoginForm
-                                title="Авторизация"
-                                userDetails={userDetails}
-                                onSubmit={onLoginFormSubmit}
-                                onInputChange={onLoginFormInputChange}
-                            />
-                        </RouteWrapper>
 
-                        <RouteWrapper path={PathService.home()} exact
-                                      roles={PathService.roles().home()}>
-                            <HomePage title="Главная"/>
-                        </RouteWrapper>
+                            <RouteWrapper path={PathService.login()}
+                                          roles={PathService.roles().login()}>
+                                <LoginForm
+                                    title="Авторизация"
+                                    userDetails={userDetails}
+                                    onSubmit={onLoginFormSubmit}
+                                    onInputChange={onLoginFormInputChange}
+                                />
+                            </RouteWrapper>
 
-                        <RouteWrapper path={PathService.clients()}
-                                      roles={PathService.roles().clients()}>
-                            <WithDataWrapper
-                                title="Клиенты"
-                                getData={ApiService.getClients}
-                                Component={ClientsPage}
-                                filterData={filterClients}
-                            />
-                        </RouteWrapper>
+                            <RouteWrapper exact path={PathService.home()}
+                                          roles={PathService.roles().home()}>
+                                <HomePage title="Главная"/>
+                            </RouteWrapper>
 
-                        <RouteWrapper path={PathService.operations()}
-                                      roles={PathService.roles().operations()}>
-                            <DefaultPage>
-                                Operations
-                            </DefaultPage>
-                        </RouteWrapper>
+                            <RouteWrapper exact path={PathService.clients()}
+                                          roles={PathService.roles().clients()}>
+                                <WithDataWrapper
+                                    title="Клиенты"
+                                    getData={ApiService.getClients}
+                                    Component={ClientsPage}
+                                    filterData={filterClients}
+                                />
+                            </RouteWrapper>
 
-                        <RouteWrapper path={PathService.workers()}
-                                      roles={PathService.roles().workers()}>
-                            <DefaultPage>
-                                Workers
-                            </DefaultPage>
-                        </RouteWrapper>
+                            <RouteWrapper path={PathService.client()}
+                                          roles={PathService.roles().client()}>
+                                <WithDataWrapper
+                                    title="Клиент"
+                                    getData={ApiService.getClient}
+                                    Component={ClientDetails}
+                                />
+                            </RouteWrapper>
 
-                        <RouteWrapper path={PathService.settings()}
-                                      roles={PathService.roles().settings()}>
-                            <DefaultPage>
-                                Settings
-                            </DefaultPage>
-                        </RouteWrapper>
+                            <RouteWrapper path={PathService.operations()}
+                                          roles={PathService.roles().operations()}>
+                                <DefaultPage>
+                                    Operations
+                                </DefaultPage>
+                            </RouteWrapper>
+
+                            <RouteWrapper path={PathService.workers()}
+                                          roles={PathService.roles().workers()}>
+                                <DefaultPage>
+                                    Workers
+                                </DefaultPage>
+                            </RouteWrapper>
+
+                            <RouteWrapper path={PathService.settings()}
+                                          roles={PathService.roles().settings()}>
+                                <DefaultPage>
+                                    Settings
+                                </DefaultPage>
+                            </RouteWrapper>
+                        </Switch>
 
                     </Panel>
 

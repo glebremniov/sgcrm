@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import {useParams} from "react-router-dom";
 import Loader from "../Loader/Loader";
 import PropTypes from "prop-types";
 
@@ -10,19 +11,33 @@ const WithDataWrapper = (props) => {
     const [hasLoaded, setLoaded] = useState(false)
     const [hasError, setError] = useState(false)
 
+    const {id} = useParams()
+
     useEffect(() => {
-        getData()
-            .then(data => {
-                setLoaded(true)
-                setError(false)
-                setData(data)
-            })
-            .catch(e => {
-                console.error(e)
-                setLoaded(true)
-                setError(true)
-            })
-    }, [getData])
+        const onSuccess = (data) => {
+            setLoaded(true)
+            setError(false)
+            setData(data)
+        }
+
+        const onError = (error) => {
+            console.error(error)
+            setLoaded(true)
+            setError(true)
+        }
+
+        if (id) {
+            getData(id)
+                .then(onSuccess)
+                .catch(onError)
+        } else {
+            getData()
+                .then(onSuccess)
+                .catch(onError)
+        }
+
+
+    }, [getData, id])
 
     if (!hasLoaded) {
         return <Loader/>

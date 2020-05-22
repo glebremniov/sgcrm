@@ -44,6 +44,10 @@ export default {
 
     getClients() {
         return _getResource(buildUri('/api/client'))
+    },
+
+    getClient(id) {
+        return _getResource(buildUri(`/api/client/${id}`))
     }
 };
 
