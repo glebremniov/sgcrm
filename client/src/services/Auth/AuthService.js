@@ -1,7 +1,6 @@
-import {headers} from "../../utils/headers";
 import {checkResponseStatus, loginResponseHandler} from "../../handlers/responseHandlers";
 import * as qs from "qs";
-import ApiService, {buildUri} from "../Api/ApiService";
+import ApiService, {buildUri, fetchWrapper} from "../Api/ApiService";
 import {defaultErrorHandler} from "../../handlers/errorHandlers";
 import RoleService from "../Role/RoleService";
 
@@ -64,37 +63,7 @@ export default {
             })
     },
 
-    checkAuthentication(setAuthenticated, setRole) {
-        if (this.checkIsTokenExists()) {
-            this.checkAuthEndpoint()
-                .then(value => {
-                    setAuthenticated(value);
-                    if (value) {
-                        setRole(this.getRole())
-                    } else {
-                        setRole(RoleService.anonymous())
-                    }
-                })
-                .catch(() => {
-                    setAuthenticated(false);
-                    setRole(RoleService.anonymous());
-                })
-        } else {
-            setAuthenticated(false)
-            setRole(RoleService.anonymous())
-        }
-    },
-
-    async checkAuthEndpoint() {
-        try {
-            const {status} = await fetch(buildUri('/api/checkAuth'),
-                {headers: headers()})
-            console.log(status);
-            return status >= 200 && status < 300
-        } catch (e) {
-            console.error(e);
-            await this.refreshToken()
-            return false
-        }
-    },
+    checkAuthEndpoint() {
+        return fetchWrapper(buildUri('/api/checkAuth'))
+    }
 };

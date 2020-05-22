@@ -16,11 +16,14 @@ import {CLIENT_VERSION} from "../../config/config";
 import HomePage from "../HomePage/HomePage";
 import WithDataWrapper from "../WithDataWrapper/WithDataWrapper";
 import ClientDetails from "../ClientDetails/ClientDetails";
+import RoleService from "../../services/Role/RoleService";
+import Loader from "../Loader/Loader";
 
 const App = () => {
 
     const [userDetails, setUserDetails] = useState(AppService.getInitialUserDetails());
     const [isAuthenticated, setAuthenticated] = useState(false);
+    const [isAuthCheckPerformed, setAuthCheckPerformed] = useState(false)
 
     useEffect(() => {
         const setUserRole = (role) => {
@@ -29,7 +32,24 @@ const App = () => {
             }
         }
 
-        AuthService.checkAuthentication(setAuthenticated, setUserRole)
+        if (AuthService.checkIsTokenExists()) {
+            AuthService.checkAuthEndpoint()
+                .then(response => {
+                    setAuthenticated(true);
+                    setUserRole(AuthService.getRole());
+                    setAuthCheckPerformed(true);
+                })
+                .catch(e => {
+                    setAuthenticated(false);
+                    setUserRole(RoleService.anonymous());
+                    setAuthCheckPerformed(true);
+                    console.error('There has been a problem with your fetch operation: ', e.message);
+                })
+        } else {
+            setAuthCheckPerformed(true);
+            setAuthenticated(false);
+            setUserRole(RoleService.anonymous())
+        }
 
     }, [userDetails])
 
@@ -52,6 +72,10 @@ const App = () => {
 
     const filterClients = (dataArr) => {
         return [...dataArr].sort(it => it.isActive ? -1 : 1)
+    }
+
+    if (!isAuthCheckPerformed) {
+        return <Loader/>
     }
 
     return (

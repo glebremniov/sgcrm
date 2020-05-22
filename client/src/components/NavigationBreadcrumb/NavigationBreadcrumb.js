@@ -16,13 +16,11 @@ const NavigationBreadcrumb = ({items = []}) => {
     ))
 
     return (
-        <div className="mt-4">
-            <Breadcrumb>
-                {
-                    transformedItems
-                }
-            </Breadcrumb>
-        </div>
+        <Breadcrumb>
+            {
+                transformedItems
+            }
+        </Breadcrumb>
     )
 }
 
