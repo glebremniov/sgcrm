@@ -44,7 +44,7 @@ const WithDataWrapper = (props) => {
         return <Loader/>
     }
 
-    if (!hasError) {
+    if (hasError) {
         return <Error/>
     }
 
