@@ -1,5 +1,6 @@
 import React from "react";
 import "./ClientCard.css";
+import classNames from "classnames"
 
 const ClientCard = (props) => {
     const {
@@ -7,11 +8,16 @@ const ClientCard = (props) => {
         paymentInfo = {},
         legalAddress = {},
         phone,
-        email
+        email,
+        isActive
     } = props
-    
+
+    const className = classNames('client-card', 'shadow', {
+        'active': isActive
+    })
+
     return (
-        <div className="client-card shadow">
+        <div className={className}>
             <div className="title">
                 <h4>{shortName}</h4>
             </div>

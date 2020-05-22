@@ -12,7 +12,7 @@ class AddressSpec extends Specification implements DomainUnitTest<Address> {
     }
 
     void "test something"() {
-        expect:"fix me"
-            true == false
+        expect: "fix me"
+        true == false
     }
 }

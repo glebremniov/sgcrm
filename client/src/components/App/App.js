@@ -48,6 +48,10 @@ const App = () => {
         setUserDetails(AppService.getInitialUserDetails())
     };
 
+    const filterClients = (dataArr) => {
+        return [...dataArr].sort(it => it.isActive ? 1 : -1)
+    }
+
     return (
         <div className="app">
             <UserDetailsContext.Provider value={{
@@ -87,6 +91,7 @@ const App = () => {
                                       roles={PathService.roles().clients()}>
                             <ClientsPage
                                 getData={ApiService.getClients}
+                                filterData={filterClients}
                             />
                         </RouteWrapper>
 

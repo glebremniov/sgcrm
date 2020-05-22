@@ -6,10 +6,10 @@ import Loader from "../Loader/Loader";
 import RowDataTransformer from "../RowDataContainer/RowDataTransformer";
 
 const ClientsPage = (props) => {
-
     const {
         title,
-        getData
+        getData,
+        filterData
     } = props
 
     const [data, setData] = useState([])
@@ -38,9 +38,6 @@ const ClientsPage = (props) => {
         return "Error!"
     }
 
-
-    console.log(data)
-
     return (
         <DefaultPage>
             <div className="clients-page">
@@ -48,7 +45,7 @@ const ClientsPage = (props) => {
                     <h2>{title}</h2>
                 </div>
 
-                <RowDataTransformer dataArr={data} CardComponent={ClientCard}/>
+                <RowDataTransformer dataArr={filterData(data)} CardComponent={ClientCard}/>
 
             </div>
         </DefaultPage>
@@ -60,7 +57,8 @@ ClientsPage.propTypes = {}
 ClientsPage.defaultProps = {
     title: 'Клиенты',
     getData: () => {
-    }
+    },
+    filterData: (data) => data
 }
 
 export default ClientsPage

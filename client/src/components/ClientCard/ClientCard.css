@@ -29,7 +29,10 @@
     margin-bottom: 0;
 }
 
-.client-card:hover {
+.client-card.active:hover {
     border: .3rem solid var(--orange);
-    /*color: var(--main-color-7);*/
+}
+
+.client-card:hover {
+    border: .3rem solid var(--light);
 }

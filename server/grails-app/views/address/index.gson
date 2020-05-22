@@ -1,7 +1,7 @@
 import address.Address
 
 model {
-	Iterable<Address> addressList
+    Iterable<Address> addressList
 }
 
 json tmpl.address(addressList ?: [])

@@ -1,7 +1,7 @@
 import address.Address
 
 model {
-	Address address
+    Address address
 }
 
 json tmpl.address(address)

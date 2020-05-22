@@ -4,4 +4,4 @@ model {
     Client client
 }
 
-json g.render(client, [resolveTemplate: false, deep:true])
+json g.render(client, [resolveTemplate: false, deep: true])

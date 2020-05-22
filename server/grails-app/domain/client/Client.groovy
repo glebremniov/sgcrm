@@ -10,13 +10,13 @@ import payment.PaymentInfo
 @GrailsCompileStatic
 class Client {
 
-    String fullName //Полное наименование
-    String shortName //Короткое наименование
+    String fullName
+    String shortName
 
     PaymentInfo paymentInfo
 
-    Address mailingAddress //Почтовый адрес
-    Address legalAddress //Юридический адрес
+    Address mailingAddress
+    Address legalAddress
 
     String phone
     String fax

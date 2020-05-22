@@ -14,9 +14,9 @@ json {
     street address.street
     buildingsNumber address.buildingsNumber
     office address.office
-	addressString address.countryISO2code + ", г." +
-			address.city + ", " +
-			address.street + " " +
-			address.buildingsNumber + ", " +
-			address.office
+    addressString address.countryISO2code + ", г." +
+            address.city + ", " +
+            address.street + " " +
+            address.buildingsNumber + ", " +
+            address.office
 }

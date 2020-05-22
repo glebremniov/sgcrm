@@ -12,7 +12,7 @@ class PaymentInfoSpec extends Specification implements DomainUnitTest<PaymentInf
     }
 
     void "test something"() {
-        expect:"fix me"
-            true == false
+        expect: "fix me"
+        true == false
     }
 }

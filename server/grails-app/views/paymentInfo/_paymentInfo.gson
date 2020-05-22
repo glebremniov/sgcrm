@@ -1,7 +1,7 @@
 import payment.PaymentInfo
 
 model {
-	PaymentInfo paymentInfo
+    PaymentInfo paymentInfo
 }
 
 json g.render(paymentInfo, [resolveTemplate: false])

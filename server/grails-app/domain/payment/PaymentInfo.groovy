@@ -2,10 +2,10 @@ package payment
 
 class PaymentInfo {
 
-    String bankName //Название банка
-    String bankIdentificationCode //БИК
-    String payerAccountNumber //УНП
-    String nceoNumber //ОКПО
+    String bankName
+    String bankIdentificationCode
+    String payerAccountNumber
+    String nceoNumber
     String checkingAccountNumber
 
     static constraints = {
