@@ -17,7 +17,7 @@ const ClientDetails = (props) => {
         <DefaultPage>
             <div className="client-details">
                 <div className="title">
-                    <h3>{shortName}</h3>
+                    <h2>{shortName}</h2>
                 </div>
 
                 <NavigationBreadcrumb
