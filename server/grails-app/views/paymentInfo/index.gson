@@ -1,0 +1,8 @@
+import payment.PaymentInfo
+
+model {
+	Iterable<PaymentInfo> paymentInfoList
+}
+
+json tmpl.paymentInfo(paymentInfoList ?: [])
+

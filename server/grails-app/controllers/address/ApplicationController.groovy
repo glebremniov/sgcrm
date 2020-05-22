@@ -1,4 +1,4 @@
-package sgcrm
+package address
 
 import grails.core.GrailsApplication
 import grails.plugin.springsecurity.annotation.Secured

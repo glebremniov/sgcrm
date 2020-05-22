@@ -1,0 +1,7 @@
+import payment.PaymentInfo
+
+model {
+	PaymentInfo paymentInfo
+}
+
+json tmpl.paymentInfo(paymentInfo)

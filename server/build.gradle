@@ -34,6 +34,8 @@ configurations {
 
 dependencies {
     developmentOnly("org.springframework.boot:spring-boot-devtools")
+    // https://github.com/TakahikoKawasaki/nv-i18n
+    compile 'com.neovisionaries:nv-i18n:1.27'
     compile "org.springframework.boot:spring-boot-starter-logging"
     compile "org.springframework.boot:spring-boot-autoconfigure"
     compile "org.grails:grails-core"

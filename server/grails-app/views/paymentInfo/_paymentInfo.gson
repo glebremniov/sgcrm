@@ -1,0 +1,7 @@
+import payment.PaymentInfo
+
+model {
+	PaymentInfo paymentInfo
+}
+
+json g.render(paymentInfo, [resolveTemplate: false])

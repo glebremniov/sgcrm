@@ -1,32 +1,28 @@
 package client
 
+import address.Address
 import enums.client.ClientType
 import enums.client.CustomerPriority
 import enums.client.DiscountPriority
 import grails.compiler.GrailsCompileStatic
+import payment.PaymentInfo
 
 @GrailsCompileStatic
 class Client {
 
-    String payerAccountNumber
-    String bankIdentificationCode
+    String fullName //Полное наименование
+    String shortName //Короткое наименование
 
-    String responsiblePerson
+    PaymentInfo paymentInfo
 
-    ClientType clientType
-    String fullName
-    String shortName
+    Address mailingAddress //Почтовый адрес
+    Address legalAddress //Юридический адрес
 
     String phone
     String fax
     String email
-    String postCode
 
-    String country
-    String state
-    String street
-    String buildingsNumber
-
+    ClientType clientType
     String webSite
 
     boolean isActive
@@ -35,8 +31,8 @@ class Client {
     DiscountPriority discountPriority = DiscountPriority.ZERO
 
     static constraints = {
-        payerAccountNumber nullable: true, blank: false, size: 9..10, unique: true
-        bankIdentificationCode nullable: true, blank: false, size: 9..10, unique: true
-        webSite nullable: true, blank: false
+        shortName size: 1..50
+        email email: true
+        webSite nullable: true
     }
 }

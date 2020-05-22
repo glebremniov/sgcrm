@@ -4,7 +4,8 @@ import "./ClientCard.css";
 const ClientCard = (props) => {
     const {
         shortName,
-        payerAccountNumber,
+        paymentInfo = {},
+        legalAddress = {},
         phone,
         email
     } = props
@@ -17,7 +18,7 @@ const ClientCard = (props) => {
             <hr/>
             <div className="body">
                 <div className="item">
-                    УНП: {payerAccountNumber}
+                    УНП: {paymentInfo.payerAccountNumber}
                 </div>
                 <div className="item">
                     Тел.: <a href={`tel:${phone}`}>{phone}</a>
@@ -26,7 +27,7 @@ const ClientCard = (props) => {
                     E-mail: <a href={`mailto:${email}`}>{email}</a>
                 </div>
                 <div className="item">
-                    Юр. адрес:
+                    Юр. адрес: {legalAddress.addressString}
                 </div>
             </div>
         </div>

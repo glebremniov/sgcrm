@@ -1,4 +1,4 @@
-package sgcrm
+package address
 
 class UrlMappings {
 
