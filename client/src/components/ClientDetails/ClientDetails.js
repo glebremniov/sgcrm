@@ -1,6 +1,7 @@
 import React from "react";
 import "./ClientDetails..css";
 import DefaultPage from "../DefaultPage/DefaultPage";
+import NavigationBreadcrumb from "../NavigationBreadcrumb/NavigationBreadcrumb";
 
 const ClientDetails = (props) => {
     const {
@@ -8,6 +9,7 @@ const ClientDetails = (props) => {
     } = props
 
     const {
+        id,
         shortName
     } = data
 
@@ -17,6 +19,15 @@ const ClientDetails = (props) => {
                 <div className="title">
                     <h3>{shortName}</h3>
                 </div>
+
+                <NavigationBreadcrumb
+                    items={[
+                        {href: '/', label: 'Главная'},
+                        {href: '/clients/', label: 'Клиенты'},
+                        {href: `/clients/${id}`, label: shortName},
+                    ]}
+                />
+
             </div>
         </DefaultPage>
     )

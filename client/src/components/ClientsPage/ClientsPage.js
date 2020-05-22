@@ -4,6 +4,7 @@ import DefaultPage from "../DefaultPage/DefaultPage";
 import ClientCard from "../ClientCard/ClientCard";
 import RowDataTransformer from "../RowDataContainer/RowDataTransformer";
 import PropTypes from "prop-types";
+import NavigationBreadcrumb from "../NavigationBreadcrumb/NavigationBreadcrumb";
 
 const ClientsPage = (props) => {
     const {
@@ -18,6 +19,13 @@ const ClientsPage = (props) => {
                 <div className="title">
                     <h2>{title}</h2>
                 </div>
+
+                <NavigationBreadcrumb
+                    items={[
+                        {href: '/', label: 'Главная'},
+                        {href: '/clients/', label: 'Клиенты'},
+                    ]}
+                />
 
                 <RowDataTransformer
                     dataArr={filterData(data)}
