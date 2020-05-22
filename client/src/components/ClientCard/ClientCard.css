@@ -7,6 +7,10 @@
     border: .3rem solid var(--white);
 }
 
+.client-card .title {
+    min-height: 4rem;
+}
+
 .client-card .body {
     margin: 1rem 0;
     color: var(--gray);

@@ -4,6 +4,7 @@ import "./ClientCard.css";
 const ClientCard = (props) => {
     const {
         shortName,
+        payerAccountNumber,
         phone,
         email
     } = props
@@ -16,7 +17,7 @@ const ClientCard = (props) => {
             <hr/>
             <div className="body">
                 <div className="item">
-                    УНП:
+                    УНП: {payerAccountNumber}
                 </div>
                 <div className="item">
                     Тел.: <a href={`tel:${phone}`}>{phone}</a>
