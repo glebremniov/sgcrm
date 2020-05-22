@@ -32,7 +32,7 @@ class Client {
 
     static constraints = {
         shortName size: 1..50
-        email email: true
+        email nullable: true, email: true
         webSite nullable: true
     }
 }

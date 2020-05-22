@@ -23,6 +23,6 @@ class Address {
         postcode size: 5..10
         street size: 1..100
         buildingsNumber size: 1..10
-        office size: 1..10
+        office nullable: true, size: 1..10
     }
 }

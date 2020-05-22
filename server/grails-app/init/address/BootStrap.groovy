@@ -42,43 +42,6 @@ class BootStrap {
     @Transactional
     private initClients() {
 
-//        new Client(
-//                fullName: "",
-//                shortName: "",
-//                paymentInfo: new PaymentInfo(
-//                        bankName: "",
-//                        bankIdentificationCode: "",
-//                        payerAccountNumber: "",
-//                        checkingAccountNumber: "",
-//                ),
-//                mailingAddress: new Address(
-//                        country: "",
-//                        countryISO3code: "",
-//                        state: "",
-//                        city: "",
-//                        postcode: "",
-//                        street: "",
-//                        buildingsNumber: "",
-//                        office: "",
-//                ),
-//                legalAddress: new Address(
-//                        country: "",
-//                        countryISO3code: "",
-//                        state: "",
-//                        city: "",
-//                        postcode: "",
-//                        street: "",
-//                        buildingsNumber: "",
-//                        office: "",
-//                ),
-//                phone: "",
-//                fax: "",
-//                email: "",
-//                clientType: ClientType.ENTITY,
-//                webSite: "",
-//                isActive: true
-//        ).save(FAIL_ON_ERROR)
-
         new Client(
                 fullName: "Сообщество с ограниченной ответственностью «Белабат»",
                 shortName: "СООО «Белабат»",
@@ -106,82 +69,86 @@ class BootStrap {
                         buildingsNumber: "156",
                         office: "29",
                 ),
-                phone: "+375 17 337 37 00",
-                fax: "+375 17 337 37 00",
+                phone: "+375173373700",
+                fax: "+375173373700",
                 email: "belabat@abatgroup.de",
                 clientType: ClientType.ENTITY,
                 webSite: "https://www.abat.de/en/belabat",
                 isActive: true
         ).save(FAIL_ON_ERROR)
 
+        new Client(
+                fullName: "Открытое акционерное общество «Минский автомобильный завод»",
+                shortName: "ОАО «МАЗ»",
+                paymentInfo: new PaymentInfo(
+                        bankName: "ОАО АСБ «Беларусбанк»",
+                        bankIdentificationCode: "815",
+                        payerAccountNumber: "101439397",
+                        checkingAccountNumber: "3012017660020",
+                        nceoNumber: "05808729"
+                ),
+                mailingAddress: new Address(
+                        countryISO2code: CountryCode.BY.alpha2,
+                        state: "Минск",
+                        city: "Минск",
+                        postcode: "220021",
+                        street: "ул. Социалистическая",
+                        buildingsNumber: "2",
+                        office: null,
+                ),
+                legalAddress: new Address(
+                        countryISO2code: CountryCode.BY.alpha2,
+                        state: "Минск",
+                        city: "Минск",
+                        postcode: "220021",
+                        street: "ул. Социалистическая",
+                        buildingsNumber: "2",
+                        office: null,
+                ),
+                phone: "+375172172077",
+                fax: "+375172172077",
+                email: "web@maz.by",
+                clientType: ClientType.ENTITY,
+                webSite: "http://maz.by/",
+                isActive: false
+        ).save(FAIL_ON_ERROR)
 
-//        new Client(
-//                responsiblePerson: 'Директор',
-//                clientType: ClientType.ENTITY,
-//                fullName: "Совместное белорусско-германское предприятие " +
-//                        "закрытое акционерное общество «МАЗ-МАН»",
-//                shortName: "СП ЗАО «МАЗ-МАН»",
-//                payerAccountNumber: "101439397",
-//                phone: "+375 17 337 37 00",
-//                fax: "+375 17 337 37 00",
-//                email: "aliaksei.prakopchyk@abat.de",
-//                country: "Республика Беларусь",
-//                postCode: "220017",
-//                state: "Минск",
-//                street: "ул. Центральная",
-//                buildingsNumber: "3а"
-//        ).save(FAIL_ON_ERROR)
-//
-//        new Client(
-//                responsiblePerson: 'Тарасенко Илья Сергеевич',
-//                clientType: ClientType.ENTITY,
-//                fullName: "Публичное акционерное общество «Авиационная холдинговая компания «Сухой»",
-//                shortName: "ПАО «Компания «Сухой»",
-//                phone: "8 (495) 940-26-63",
-//                fax: "8 (495) 940-26-64",
-//                payerAccountNumber: "7740000090",
-//                email: "info@sukhoi.org",
-//                country: "Российская Федерация",
-//                postCode: "125284",
-//                state: "Москва",
-//                street: "ул. Поликарпова",
-//                buildingsNumber: "23 Б",
-//                webSite: "http://www.e-disclosure.ru/portal/company.aspx?id=13900"
-//        ).save(FAIL_ON_ERROR)
-//
-//        new Client(
-//                responsiblePerson: "Осеевский Михаил Эдуардович",
-//                clientType: ClientType.ENTITY,
-//                fullName: "Публичное акционерное общество «Ростелеком»",
-//                shortName: "ПАО «Ростелеком»",
-//                payerAccountNumber: "7707049388",
-//                phone: "+7 (499) 999-82-83",
-//                fax: "+7 (499) 999-82-22",
-//                email: "rostelecom@rt.ru",
-//                country: "Российская Федерация",
-//                postCode: "191002",
-//                state: "Санкт-Петербург",
-//                street: "ул. Достоевского",
-//                buildingsNumber: "15",
-//                webSite: "https://www.company.rt.ru/"
-//        ).save(FAIL_ON_ERROR)
-//
-//        new Client(
-//                responsiblePerson: "Director",
-//                clientType: ClientType.ENTITY,
-//                fullName: "Публичное акционерное общество «Аэрофлот»",
-//                shortName: "ПАО «Аэрофлот»",
-//                payerAccountNumber: "7712040126",
-//                phone: "8 (800) 444-55-55",
-//                fax: "8 (800) 444-55-55",
-//                email: "aeroflot@af.ru",
-//                country: "Российская Федерация",
-//                postCode: "119019",
-//                state: "Санкт-Петербург",
-//                street: "ул. Арбат",
-//                buildingsNumber: "1",
-//                webSite: "https://www.aeroflot.ru/"
-//        ).save(FAIL_ON_ERROR)
+        new Client(
+                fullName: "Открытое акционерное общество «МАПИД»",
+                shortName: "ОАО «МАПИД»",
+                paymentInfo: new PaymentInfo(
+                        bankName: "ОАО «Белинвестбанк»",
+                        bankIdentificationCode: "BLBBBY2X",
+                        payerAccountNumber: "101439397",
+                        checkingAccountNumber: "BY87BLBB30120100008115001001",
+                        nceoNumber: "05808729"
+                ),
+                mailingAddress: new Address(
+                        countryISO2code: CountryCode.BY.alpha2,
+                        state: "Минск",
+                        city: "Минск",
+                        postcode: "220036",
+                        street: "ул. Р. Люксембург",
+                        buildingsNumber: "205",
+                        office: null,
+                ),
+                legalAddress: new Address(
+                        countryISO2code: CountryCode.BY.alpha2,
+                        state: "Минск",
+                        city: "Минск",
+                        postcode: "220036",
+                        street: "ул. Р. Люксембург",
+                        buildingsNumber: "205",
+                        office: null,
+                ),
+                phone: "+375172098700",
+                fax: "+375172098700",
+                email: "mail@mapid.by",
+                clientType: ClientType.ENTITY,
+                webSite: "http://mapid.by/",
+                isActive: true
+        ).save(FAIL_ON_ERROR)
+
     }
 
     def destroy = {

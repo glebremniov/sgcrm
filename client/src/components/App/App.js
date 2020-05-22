@@ -49,7 +49,7 @@ const App = () => {
     };
 
     const filterClients = (dataArr) => {
-        return [...dataArr].sort(it => it.isActive ? 1 : -1)
+        return [...dataArr].sort(it => it.isActive ? -1 : 1)
     }
 
     return (
