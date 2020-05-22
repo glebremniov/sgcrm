@@ -8,7 +8,7 @@ const HomePage = ({title}) => {
 
     return (
         <DefaultPage title={title}
-                     breadcrumbItems={[PathService.breadCrumbs().home()]}>
+                     breadcrumbItems={[PathService.breadcrumbs().home()]}>
             <div className="home-page">
 
             </div>

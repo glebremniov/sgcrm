@@ -88,7 +88,7 @@ export default {
         }
     },
 
-    breadCrumbs: () => {
+    breadcrumbs: () => {
         return {
             home: () => {
                 return {

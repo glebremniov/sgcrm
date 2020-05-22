@@ -132,23 +132,35 @@ const App = () => {
 
                             <RouteWrapper path={PathService.operations()}
                                           roles={PathService.roles().operations()}>
-                                <DefaultPage>
-                                    Operations
-                                </DefaultPage>
+                                <DefaultPage
+                                    title="Операции"
+                                    breadcrumbItems={[
+                                        PathService.breadcrumbs().home(),
+                                        PathService.breadcrumbs().operations()
+                                    ]}
+                                />
                             </RouteWrapper>
 
                             <RouteWrapper path={PathService.workers()}
                                           roles={PathService.roles().workers()}>
-                                <DefaultPage>
-                                    Workers
-                                </DefaultPage>
+                                <DefaultPage
+                                    title="Сотрудники"
+                                    breadcrumbItems={[
+                                        PathService.breadcrumbs().home(),
+                                        PathService.breadcrumbs().workers()
+                                    ]}
+                                />
                             </RouteWrapper>
 
                             <RouteWrapper path={PathService.settings()}
                                           roles={PathService.roles().settings()}>
-                                <DefaultPage>
-                                    Settings
-                                </DefaultPage>
+                                <DefaultPage
+                                    title="Настройки"
+                                    breadcrumbItems={[
+                                        PathService.breadcrumbs().home(),
+                                        PathService.breadcrumbs().settings()
+                                    ]}
+                                />
                             </RouteWrapper>
 
                         </Panel>

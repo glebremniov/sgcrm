@@ -9,9 +9,9 @@ const ClientDetails = ({getData}) => {
 
     const [title, setTitle] = useState('Загрузка...')
     const [breadcrumbItems, setBreadcrumbItems] = useState([
-        PathService.breadCrumbs().home(),
-        PathService.breadCrumbs().clients(),
-        PathService.breadCrumbs().client('', 'Загрузка...'),
+        PathService.breadcrumbs().home(),
+        PathService.breadcrumbs().clients(),
+        PathService.breadcrumbs().client('', 'Загрузка...'),
     ])
 
     const onViewMounted = ({id, shortName}) => {
@@ -23,7 +23,7 @@ const ClientDetails = ({getData}) => {
         const indexOfLastElement = breadcrumbItemsCopy.length - 1;
 
         if (breadcrumbItemsCopy[indexOfLastElement].label !== shortName) {
-            breadcrumbItemsCopy[indexOfLastElement] = PathService.breadCrumbs().client(id, shortName)
+            breadcrumbItemsCopy[indexOfLastElement] = PathService.breadcrumbs().client(id, shortName)
             setBreadcrumbItems(breadcrumbItemsCopy)
         }
     }

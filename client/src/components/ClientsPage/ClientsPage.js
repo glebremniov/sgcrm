@@ -19,8 +19,8 @@ const ClientsPage = (props) => {
     return (
         <DefaultPage title={title}
                      breadcrumbItems={[
-                         PathService.breadCrumbs().home(),
-                         PathService.breadCrumbs().clients(),
+                         PathService.breadcrumbs().home(),
+                         PathService.breadcrumbs().clients(),
                      ]}>
             <div className="clients-page">
 
