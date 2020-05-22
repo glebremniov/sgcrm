@@ -1,36 +1,58 @@
-import React from "react";
+import React, {useContext, useEffect, useState} from "react";
 import "./ClientDetails..css";
 import DefaultPage from "../DefaultPage/DefaultPage";
-import NavigationBreadcrumb from "../NavigationBreadcrumb/NavigationBreadcrumb";
+import WithDataWrapper from "../WithDataWrapper/WithDataWrapper";
+import {PathServiceContext} from "../../contexts/PathServiceContext";
 
-const ClientDetails = (props) => {
-    const {
-        data
-    } = props
+const ClientDetails = ({getData}) => {
+    const PathService = useContext(PathServiceContext);
 
-    const {
-        id,
-        shortName
-    } = data
+    const [title, setTitle] = useState('Загрузка...')
+    const [breadcrumbItems, setBreadcrumbItems] = useState([
+        PathService.breadCrumbs().home(),
+        PathService.breadCrumbs().clients(),
+        PathService.breadCrumbs().client('', 'Загрузка...'),
+    ])
+
+    const onViewMounted = ({id, shortName}) => {
+        if (title !== shortName) {
+            setTitle(shortName)
+        }
+
+        const breadcrumbItemsCopy = [...breadcrumbItems]
+        const indexOfLastElement = breadcrumbItemsCopy.length - 1;
+
+        if (breadcrumbItemsCopy[indexOfLastElement].label !== shortName) {
+            breadcrumbItemsCopy[indexOfLastElement] = PathService.breadCrumbs().client(id, shortName)
+            setBreadcrumbItems(breadcrumbItemsCopy)
+        }
+    }
 
     return (
-        <DefaultPage>
+        <DefaultPage title={title}
+                     breadcrumbItems={breadcrumbItems}>
             <div className="client-details">
-                <div className="title">
-                    <h2>{shortName}</h2>
-                </div>
-
-                <NavigationBreadcrumb
-                    items={[
-                        {href: '/', label: 'Главная'},
-                        {href: '/clients/', label: 'Клиенты'},
-                        {href: `/clients/${id}`, label: shortName},
-                    ]}
+                <WithDataWrapper
+                    getData={getData}
+                    onMount={onViewMounted}
+                    Component={ClientDetailsView}
                 />
-
             </div>
         </DefaultPage>
     )
 }
 
 export default ClientDetails
+
+const ClientDetailsView = ({data, onMount}) => {
+
+    useEffect(() => {
+        onMount(data)
+    }, [onMount, data])
+
+    return (
+        <div className="client-details-view">
+
+        </div>
+    )
+}

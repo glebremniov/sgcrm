@@ -1,7 +1,7 @@
 import React from "react";
 
 import "./Loader.css"
-import loaderIcon from "./Rolling-1s-200px.svg"
+import loaderIcon from "./Dual Ball-0.9s-200px.svg"
 
 const Loader = () => {
     return (

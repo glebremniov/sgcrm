@@ -1,35 +1,35 @@
-import React from "react";
+import React, {useContext} from "react";
 import "./ClientsPage.css";
 import DefaultPage from "../DefaultPage/DefaultPage";
 import ClientCard from "../ClientCard/ClientCard";
 import RowDataTransformer from "../RowDataContainer/RowDataTransformer";
 import PropTypes from "prop-types";
-import NavigationBreadcrumb from "../NavigationBreadcrumb/NavigationBreadcrumb";
+import WithDataWrapper from "../WithDataWrapper/WithDataWrapper";
+import {PathServiceContext} from "../../contexts/PathServiceContext";
 
 const ClientsPage = (props) => {
     const {
         title,
-        data,
-        filterData
+        filterData,
+        getData
     } = props
 
+    const PathService = useContext(PathServiceContext)
+
     return (
-        <DefaultPage>
+        <DefaultPage title={title}
+                     breadcrumbItems={[
+                         PathService.breadCrumbs().home(),
+                         PathService.breadCrumbs().clients(),
+                     ]}>
             <div className="clients-page">
-                <div className="title">
-                    <h2>{title}</h2>
-                </div>
 
-                <NavigationBreadcrumb
-                    items={[
-                        {href: '/', label: 'Главная'},
-                        {href: '/clients/', label: 'Клиенты'},
-                    ]}
+                <WithDataWrapper
+                    getData={getData}
+                    filterData={filterData}
+                    Component={RowDataTransformer}
+                    CardComponent={ClientCard}
                 />
-
-                <RowDataTransformer
-                    dataArr={filterData(data)}
-                    CardComponent={ClientCard}/>
 
             </div>
         </DefaultPage>

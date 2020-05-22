@@ -79,12 +79,59 @@ export default {
         return {
             home: () => _PATH_DATA.HOME.roles,
             clients: () => _PATH_DATA.CLIENTS.roles,
-            client: () => _PATH_DATA.CLIENTS.roles,
+            client: () => _PATH_DATA.CLIENT.roles,
             operations: () => _PATH_DATA.OPERATIONS.roles,
             workers: () => _PATH_DATA.WORKERS.roles,
             calendar: () => _PATH_DATA.WORKERS.roles,
             settings: () => _PATH_DATA.SETTINGS.roles,
             login: () => _PATH_DATA.LOGIN.roles,
+        }
+    },
+
+    breadCrumbs: () => {
+        return {
+            home: () => {
+                return {
+                    label: 'Главная',
+                    href: _PATH_DATA.HOME.path,
+                }
+            },
+            clients: () => {
+                return {
+                    label: 'Клиенты',
+                    href: _PATH_DATA.CLIENTS.path,
+                }
+            },
+            client: (id, title) => {
+                return {
+                    label: title,
+                    href: _PATH_DATA.HOME.path + id,
+                }
+            },
+            operations: () => {
+                return {
+                    label: 'Операции',
+                    href: _PATH_DATA.OPERATIONS.path,
+                }
+            },
+            workers: () => {
+                return {
+                    label: 'Сотрудники',
+                    href: _PATH_DATA.WORKERS.path,
+                }
+            },
+            calendar: () => {
+                return {
+                    label: 'Календарь',
+                    href: _PATH_DATA.CALENDAR.path,
+                }
+            },
+            settings: () => {
+                return {
+                    label: 'Настройки',
+                    href: _PATH_DATA.SETTINGS.path,
+                }
+            }
         }
     },
 

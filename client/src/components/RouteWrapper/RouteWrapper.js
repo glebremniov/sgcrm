@@ -1,10 +1,12 @@
 import React, {useContext} from "react";
 import {Redirect, Route} from "react-router-dom";
 import {UserDetailsContext} from "../../contexts/UserDetailsContext";
+import {PathServiceContext} from "../../contexts/PathServiceContext";
 
-const RouteWrapper = ({children, roles, loginPathname, ...rest}) => {
+const RouteWrapper = ({children, roles, ...rest}) => {
 
-    const userDetails = useContext(UserDetailsContext)
+    const userDetails = useContext(UserDetailsContext);
+    const PathService = useContext(PathServiceContext);
 
     const isRoleAppropriate = (role, roles) => roles.includes(role);
 
@@ -17,7 +19,7 @@ const RouteWrapper = ({children, roles, loginPathname, ...rest}) => {
                 ) : (
                     <Redirect
                         to={{
-                            pathname: "/login",
+                            pathname: PathService.login(),
                             state: {from: location}
                         }}
                     />
@@ -32,5 +34,4 @@ export default RouteWrapper
 
 RouteWrapper.defaultProps = {
     roles: [],
-    loginPathname: '/login',
 }
