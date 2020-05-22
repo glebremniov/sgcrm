@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import Loader from "../Loader/Loader";
 import PropTypes from "prop-types";
+import Error from "../Error/Error";
 
 const WithDataWrapper = (props) => {
 
@@ -43,8 +44,8 @@ const WithDataWrapper = (props) => {
         return <Loader/>
     }
 
-    if (hasError) {
-        return "Error!"
+    if (!hasError) {
+        return <Error/>
     }
 
     return (
