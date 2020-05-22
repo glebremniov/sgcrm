@@ -14,6 +14,7 @@ import ClientsPage from "../ClientsPage/ClientsPage";
 import ApiService from "../../services/Api/ApiService";
 import {CLIENT_VERSION} from "../../config/config";
 import HomePage from "../HomePage/HomePage";
+import WithDataWrapper from "../WithDataWrapper/WithDataWrapper";
 
 const App = () => {
 
@@ -89,8 +90,10 @@ const App = () => {
 
                         <RouteWrapper path={PathService.clients()}
                                       roles={PathService.roles().clients()}>
-                            <ClientsPage
+                            <WithDataWrapper
+                                title="Клиенты"
                                 getData={ApiService.getClients}
+                                Component={ClientsPage}
                                 filterData={filterClients}
                             />
                         </RouteWrapper>

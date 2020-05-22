@@ -1,42 +1,16 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import "./ClientsPage.css";
 import DefaultPage from "../DefaultPage/DefaultPage";
 import ClientCard from "../ClientCard/ClientCard";
-import Loader from "../Loader/Loader";
 import RowDataTransformer from "../RowDataContainer/RowDataTransformer";
+import PropTypes from "prop-types";
 
 const ClientsPage = (props) => {
     const {
         title,
-        getData,
+        data,
         filterData
     } = props
-
-    const [data, setData] = useState([])
-    const [hasLoaded, setLoaded] = useState(false)
-    const [hasError, setError] = useState(false)
-
-    useEffect(() => {
-        getData()
-            .then(data => {
-                setLoaded(true)
-                setError(false)
-                setData(data)
-            })
-            .catch(e => {
-                console.error(e)
-                setLoaded(true)
-                setError(true)
-            })
-    }, [getData])
-
-    if (!hasLoaded) {
-        return <Loader/>
-    }
-
-    if (hasError) {
-        return "Error!"
-    }
 
     return (
         <DefaultPage>
@@ -45,20 +19,23 @@ const ClientsPage = (props) => {
                     <h2>{title}</h2>
                 </div>
 
-                <RowDataTransformer dataArr={filterData(data)} CardComponent={ClientCard}/>
+                <RowDataTransformer
+                    dataArr={filterData(data)}
+                    CardComponent={ClientCard}/>
 
             </div>
         </DefaultPage>
     )
 }
 
-ClientsPage.propTypes = {}
+ClientsPage.propTypes = {
+    title: PropTypes.string,
+    data: PropTypes.array,
+}
 
 ClientsPage.defaultProps = {
-    title: 'Клиенты',
-    getData: () => {
-    },
-    filterData: (data) => data
+    title: '',
+    data: [],
 }
 
 export default ClientsPage
