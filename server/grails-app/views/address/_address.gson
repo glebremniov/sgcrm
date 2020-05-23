@@ -4,19 +4,5 @@ model {
     Address address
 }
 
-json {
-    id address.id
-    country address.country
-    countryISO2code address.countryISO2code
-    state address.state
-    city address.city
-    postcode address.postcode
-    street address.street
-    buildingsNumber address.buildingsNumber
-    office address.office
-    addressString address.countryISO2code + ", г." +
-            address.city + ", " +
-            address.street + " " +
-            address.buildingsNumber + ", " +
-            address.office
-}
+json g.render(address, [resolveTemplate: false])
+
