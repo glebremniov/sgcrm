@@ -74,6 +74,10 @@ const App = () => {
         return [...dataArr].sort(it => it.isActive ? -1 : 1)
     }
 
+    const onClientDetailsSubmit = (method, data) => {
+        console.debug('submit clientDetails', method, data)
+    }
+
     if (!isAuthCheckPerformed) {
         return <Loader/>
     }
@@ -104,8 +108,7 @@ const App = () => {
                                     title="Авторизация"
                                     userDetails={userDetails}
                                     onSubmit={onLoginFormSubmit}
-                                    onInputChange={onLoginFormInputChange}
-                                />
+                                    onInputChange={onLoginFormInputChange}/>
                             </RouteWrapper>
 
                             <RouteWrapper exact path={PathService.home()}
@@ -119,15 +122,14 @@ const App = () => {
                                 <ClientsPage
                                     title="Клиенты"
                                     getData={ApiService.getClients}
-                                    filterData={filterClients}
-                                />
+                                    filterData={filterClients}/>
                             </RouteWrapper>
 
                             <RouteWrapper path={PathService.client()}
                                           roles={PathService.roles().client()}>
                                 <ClientDetails
                                     getData={ApiService.getClient}
-                                />
+                                    onSubmit={onClientDetailsSubmit}/>
                             </RouteWrapper>
 
                             <RouteWrapper path={PathService.operations()}
@@ -137,8 +139,7 @@ const App = () => {
                                     breadcrumbItems={[
                                         PathService.breadcrumbs().home(),
                                         PathService.breadcrumbs().operations()
-                                    ]}
-                                />
+                                    ]}/>
                             </RouteWrapper>
 
                             <RouteWrapper path={PathService.workers()}
@@ -148,8 +149,7 @@ const App = () => {
                                     breadcrumbItems={[
                                         PathService.breadcrumbs().home(),
                                         PathService.breadcrumbs().workers()
-                                    ]}
-                                />
+                                    ]}/>
                             </RouteWrapper>
 
                             <RouteWrapper path={PathService.settings()}
@@ -159,8 +159,7 @@ const App = () => {
                                     breadcrumbItems={[
                                         PathService.breadcrumbs().home(),
                                         PathService.breadcrumbs().settings()
-                                    ]}
-                                />
+                                    ]}/>
                             </RouteWrapper>
 
                         </Panel>

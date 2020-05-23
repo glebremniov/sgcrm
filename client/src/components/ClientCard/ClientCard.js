@@ -8,7 +8,7 @@ const ClientCard = (props) => {
         id,
         shortName,
         paymentInfo = {},
-        legalAddress = {},
+        webSite,
         phone,
         email,
         isActive
@@ -22,7 +22,7 @@ const ClientCard = (props) => {
         <div className={className}>
             <div className="title">
                 <Link to={`${id}`}>
-                    <h4>{shortName}</h4>
+                    <h3>{shortName}</h3>
                 </Link>
             </div>
             <hr/>
@@ -37,7 +37,7 @@ const ClientCard = (props) => {
                     E-mail: <a href={`mailto:${email}`}>{email}</a>
                 </div>
                 <div className="item">
-                    Юр. адрес: {legalAddress.addressString}
+                    Веб-сайт: <a href={webSite}>{webSite}</a>
                 </div>
             </div>
         </div>
