@@ -146,7 +146,7 @@ export default {
 
     isPathExists: _isPathExists,
 
-    isPathActive: (targetPath, activePath, rootPath = '/') => {
+    isPathActive: (targetPath, activePath, rootPath = HOME_PATH) => {
         const match = activePath.match(targetPath)
         return match && (activePath === rootPath ? true : match[0] !== rootPath)
     },
