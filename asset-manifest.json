@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/sgcrm/static/css/main.2d9a02c3.chunk.css",
-    "main.js": "/sgcrm/static/js/main.7cc96347.chunk.js",
-    "main.js.map": "/sgcrm/static/js/main.7cc96347.chunk.js.map",
+    "main.js": "/sgcrm/static/js/main.4c967e5b.chunk.js",
+    "main.js.map": "/sgcrm/static/js/main.4c967e5b.chunk.js.map",
     "runtime-main.js": "/sgcrm/static/js/runtime-main.9c703f7f.js",
     "runtime-main.js.map": "/sgcrm/static/js/runtime-main.9c703f7f.js.map",
     "static/js/2.ded7bb8f.chunk.js": "/sgcrm/static/js/2.ded7bb8f.chunk.js",
     "static/js/2.ded7bb8f.chunk.js.map": "/sgcrm/static/js/2.ded7bb8f.chunk.js.map",
     "index.html": "/sgcrm/index.html",
-    "precache-manifest.867288d25dc9c99add5f3cae972a70e0.js": "/sgcrm/precache-manifest.867288d25dc9c99add5f3cae972a70e0.js",
+    "precache-manifest.a024e31a9a280d6becf53487d3b4109f.js": "/sgcrm/precache-manifest.a024e31a9a280d6becf53487d3b4109f.js",
     "service-worker.js": "/sgcrm/service-worker.js",
     "static/css/main.2d9a02c3.chunk.css.map": "/sgcrm/static/css/main.2d9a02c3.chunk.css.map",
     "static/js/2.ded7bb8f.chunk.js.LICENSE.txt": "/sgcrm/static/js/2.ded7bb8f.chunk.js.LICENSE.txt",
@@ -18,6 +18,6 @@
     "static/js/runtime-main.9c703f7f.js",
     "static/js/2.ded7bb8f.chunk.js",
     "static/css/main.2d9a02c3.chunk.css",
-    "static/js/main.7cc96347.chunk.js"
+    "static/js/main.4c967e5b.chunk.js"
   ]
 }
