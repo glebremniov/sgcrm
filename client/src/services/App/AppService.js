@@ -40,5 +40,9 @@ export default {
             password: '',
             role: RoleService.anonymous()
         }
+    },
+
+    isProdEnv() {
+        return !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
     }
 }
