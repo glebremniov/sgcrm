@@ -3,7 +3,7 @@ import "./ClientDetails..css";
 import DefaultPage from "../DefaultPage/DefaultPage";
 import WithDataWrapper from "../WithDataWrapper/WithDataWrapper";
 import {PathServiceContext} from "../../contexts/PathServiceContext";
-import {Button, Col, Form, Row} from "react-bootstrap";
+import {Button, ButtonGroup, Col, Form, Row} from "react-bootstrap";
 import ClientGeneralInfo from "../ClientInfo/ClientGeneralInfo";
 import ClientAddressInfo from "../ClientInfo/ClientAddressInfo";
 import WithClientInfoWrapper from "../ClientInfo/WithClientInfoWrapper";
@@ -93,10 +93,18 @@ const ClientDetailsView = ({data, onMount}) => {
                     Component={ClientPaymentInfo}
                 />
 
-
-                <Button variant="primary" type="submit">
-                    Сохранить
-                </Button>
+                <hr/>
+                <div className="float-right">
+                    <ButtonGroup aria-label="Basic example">
+                        <Button variant="outline-secondary">
+                            Отменить
+                        </Button>
+                        <Button variant="primary"
+                                type="submit">
+                            Сохранить
+                        </Button>
+                    </ButtonGroup>
+                </div>
             </Form>
         </div>
     )
