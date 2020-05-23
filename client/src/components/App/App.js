@@ -18,6 +18,7 @@ import ClientDetails from "../ClientDetails/ClientDetails";
 import RoleService from "../../services/Role/RoleService";
 import Loader from "../Loader/Loader";
 import {PathServiceContext} from "../../contexts/PathServiceContext";
+import {faBox, faCalendarAlt} from "@fortawesome/free-solid-svg-icons";
 
 const App = () => {
 
@@ -136,6 +137,7 @@ const App = () => {
                                           roles={PathService.roles().operations()}>
                                 <DefaultPage
                                     title="Операции"
+                                    icon={faBox}
                                     breadcrumbItems={[
                                         PathService.breadcrumbs().home(),
                                         PathService.breadcrumbs().operations()
@@ -145,10 +147,11 @@ const App = () => {
                             <RouteWrapper path={PathService.workers()}
                                           roles={PathService.roles().workers()}>
                                 <DefaultPage
-                                    title="Сотрудники"
+                                    title="Календарь"
+                                    icon={faCalendarAlt}
                                     breadcrumbItems={[
                                         PathService.breadcrumbs().home(),
-                                        PathService.breadcrumbs().workers()
+                                        PathService.breadcrumbs().calendar()
                                     ]}/>
                             </RouteWrapper>
 

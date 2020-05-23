@@ -6,6 +6,7 @@ import RowDataTransformer from "../RowDataContainer/RowDataTransformer";
 import PropTypes from "prop-types";
 import WithDataWrapper from "../WithDataWrapper/WithDataWrapper";
 import {PathServiceContext} from "../../contexts/PathServiceContext";
+import {faWallet} from "@fortawesome/free-solid-svg-icons";
 
 const ClientsPage = (props) => {
     const {
@@ -18,6 +19,7 @@ const ClientsPage = (props) => {
 
     return (
         <DefaultPage title={title}
+                     icon={faWallet}
                      breadcrumbItems={[
                          PathService.breadcrumbs().home(),
                          PathService.breadcrumbs().clients(),
