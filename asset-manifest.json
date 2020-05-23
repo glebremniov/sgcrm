@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/sgcrm/static/css/main.2d9a02c3.chunk.css",
-    "main.js": "/sgcrm/static/js/main.4c967e5b.chunk.js",
-    "main.js.map": "/sgcrm/static/js/main.4c967e5b.chunk.js.map",
+    "main.css": "/sgcrm/static/css/main.dd50048d.chunk.css",
+    "main.js": "/sgcrm/static/js/main.57825644.chunk.js",
+    "main.js.map": "/sgcrm/static/js/main.57825644.chunk.js.map",
     "runtime-main.js": "/sgcrm/static/js/runtime-main.9c703f7f.js",
     "runtime-main.js.map": "/sgcrm/static/js/runtime-main.9c703f7f.js.map",
-    "static/js/2.ded7bb8f.chunk.js": "/sgcrm/static/js/2.ded7bb8f.chunk.js",
-    "static/js/2.ded7bb8f.chunk.js.map": "/sgcrm/static/js/2.ded7bb8f.chunk.js.map",
+    "static/js/2.36d27651.chunk.js": "/sgcrm/static/js/2.36d27651.chunk.js",
+    "static/js/2.36d27651.chunk.js.map": "/sgcrm/static/js/2.36d27651.chunk.js.map",
     "index.html": "/sgcrm/index.html",
-    "precache-manifest.a024e31a9a280d6becf53487d3b4109f.js": "/sgcrm/precache-manifest.a024e31a9a280d6becf53487d3b4109f.js",
+    "precache-manifest.00d78a987fdfc3f44e3075c500bd2f9a.js": "/sgcrm/precache-manifest.00d78a987fdfc3f44e3075c500bd2f9a.js",
     "service-worker.js": "/sgcrm/service-worker.js",
-    "static/css/main.2d9a02c3.chunk.css.map": "/sgcrm/static/css/main.2d9a02c3.chunk.css.map",
-    "static/js/2.ded7bb8f.chunk.js.LICENSE.txt": "/sgcrm/static/js/2.ded7bb8f.chunk.js.LICENSE.txt",
+    "static/css/main.dd50048d.chunk.css.map": "/sgcrm/static/css/main.dd50048d.chunk.css.map",
+    "static/js/2.36d27651.chunk.js.LICENSE.txt": "/sgcrm/static/js/2.36d27651.chunk.js.LICENSE.txt",
     "static/media/Dual Ball-0.9s-200px.svg": "/sgcrm/static/media/Dual Ball-0.9s-200px.248c6acf.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.9c703f7f.js",
-    "static/js/2.ded7bb8f.chunk.js",
-    "static/css/main.2d9a02c3.chunk.css",
-    "static/js/main.4c967e5b.chunk.js"
+    "static/js/2.36d27651.chunk.js",
+    "static/css/main.dd50048d.chunk.css",
+    "static/js/main.57825644.chunk.js"
   ]
 }
