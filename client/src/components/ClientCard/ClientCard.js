@@ -1,12 +1,14 @@
 import React from "react";
 import "./ClientCard.css";
 import classNames from "classnames"
+import {Link} from "react-router-dom";
 
 const ClientCard = (props) => {
     const {
+        id,
         shortName,
         paymentInfo = {},
-        legalAddress = {},
+        webSite,
         phone,
         email,
         isActive
@@ -19,7 +21,9 @@ const ClientCard = (props) => {
     return (
         <div className={className}>
             <div className="title">
-                <h4>{shortName}</h4>
+                <Link to={`${id}`}>
+                    <h3>{shortName}</h3>
+                </Link>
             </div>
             <hr/>
             <div className="body">
@@ -33,7 +37,7 @@ const ClientCard = (props) => {
                     E-mail: <a href={`mailto:${email}`}>{email}</a>
                 </div>
                 <div className="item">
-                    Юр. адрес: {legalAddress.addressString}
+                    Веб-сайт: <a href={webSite}>{webSite}</a>
                 </div>
             </div>
         </div>

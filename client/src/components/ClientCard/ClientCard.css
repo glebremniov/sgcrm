@@ -5,10 +5,20 @@
     border-radius: var(--main-border-radius-d);
     cursor: pointer;
     border: .3rem solid var(--white);
+    height: 90%;
 }
 
 .client-card .title {
     min-height: 4rem;
+}
+
+.client-card .title a {
+    color: var(--gray-dark);
+}
+
+.client-card .title a:hover {
+    color: var(--cyan);
+    text-decoration: none;
 }
 
 .client-card .body {

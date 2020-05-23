@@ -1,13 +1,13 @@
 import React from "react";
 import {Col, Row} from "react-bootstrap";
 
-const RowDataTransformer = ({dataArr = [], CardComponent}) => {
+const RowDataTransformer = ({data = [], CardComponent}) => {
 
-    const reshapeDataArr = (dataArr) => {
+    const reshapeDataArr = (data) => {
         let resultArr = [];
 
-        if (Array.isArray(dataArr)) {
-            let dataArrCopy = [...dataArr]
+        if (Array.isArray(data)) {
+            let dataArrCopy = [...data]
             while (dataArrCopy.length) {
                 resultArr.push(dataArrCopy.splice(0, 3))
             }
@@ -16,8 +16,8 @@ const RowDataTransformer = ({dataArr = [], CardComponent}) => {
         return resultArr;
     }
 
-    const transformDataArr = (dataArr) => {
-        return reshapeDataArr(dataArr).map((row, i) => (
+    const transformDataArr = (data) => {
+        return reshapeDataArr(data).map((row, i) => (
             <Row key={i}>
                 {
                     row.map((col, i) => (
@@ -31,7 +31,7 @@ const RowDataTransformer = ({dataArr = [], CardComponent}) => {
     };
 
     return (
-        <>{transformDataArr(dataArr)}</>
+        <>{transformDataArr(data)}</>
     )
 };
 

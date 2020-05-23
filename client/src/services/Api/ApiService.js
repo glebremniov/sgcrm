@@ -44,6 +44,10 @@ export default {
 
     getClients() {
         return _getResource(buildUri('/api/client'))
+    },
+
+    getClient(id) {
+        return _getResource(buildUri(`/api/client/${id}`))
     }
 };
 
@@ -51,11 +55,18 @@ export const buildUri = (path, serverUrl = SERVER_URL) => {
     return `${serverUrl}${path}`
 };
 
+export const fetchWrapper = async function (uri, init = {}) {
+    init.headers = {...init.headers, ...headers()}
+    const response = await fetch(uri, init)
+    if (response.ok) {
+        return response;
+    }
+    throw new Error('Network response was not ok.');
+}
+
 const _getResource = async (uri) => {
     try {
-        const response = await fetch(uri, {
-            headers: headers()
-        });
+        const response = await fetchWrapper(uri)
 
         return response.json()
     } catch (e) {

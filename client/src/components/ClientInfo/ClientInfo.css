@@ -1,0 +1,12 @@
+.client-info {
+    margin-top: 2rem;
+}
+
+.client-info .title {
+    color: var(--blue);
+    margin-bottom: 1rem;
+}
+
+.client-info label {
+    color: var(--secondary);
+}
