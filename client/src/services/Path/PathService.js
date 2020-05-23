@@ -1,8 +1,17 @@
 import RoleService from "../Role/RoleService";
+import {APP_NAME, HOME_PAGE} from "../../config/config";
+
+const _getHomePath = () => {
+    const parts = HOME_PAGE.split('/');
+    return parts && parts.length > 0 ?
+        parts[parts.length - 1] : APP_NAME
+}
+
+const HOME_PATH = `/${_getHomePath()}`;
 
 const _PATH_DATA = {
     HOME: {
-        path: "/",
+        path: HOME_PATH,
         roles: [
             RoleService.admin(),
             RoleService.manager(),
@@ -10,49 +19,49 @@ const _PATH_DATA = {
         ],
     },
     CLIENTS: {
-        path: "/clients/",
+        path: HOME_PATH + "/clients/",
         roles: [
             RoleService.admin(),
             RoleService.manager(),
         ],
     },
     CLIENT: {
-        path: "/clients/:id",
+        path: HOME_PATH + "/clients/:id",
         roles: [
             RoleService.admin(),
             RoleService.manager(),
         ],
     },
     OPERATIONS: {
-        path: "/operations/",
+        path: HOME_PATH + "/operations/",
         roles: [
             RoleService.admin(),
             RoleService.manager(),
         ],
     },
     WORKERS: {
-        path: "/workers/",
+        path: HOME_PATH + "/workers/",
         roles: [
             RoleService.admin(),
             RoleService.manager(),
         ],
     },
     CALENDAR: {
-        path: "/calendar/",
+        path: HOME_PATH + "/calendar/",
         roles: [
             RoleService.admin(),
             RoleService.manager()
         ]
     },
     SETTINGS: {
-        path: "/settings",
+        path: HOME_PATH + "/settings",
         roles: [
             RoleService.admin(),
             RoleService.manager(),
         ],
     },
     LOGIN: {
-        path: "/login",
+        path: HOME_PATH + "/login",
         roles: [
             RoleService.admin(),
             RoleService.manager(),
