@@ -1,15 +1,9 @@
 import React from "react";
-import "./ClientGeneralInfo.css";
 import {Col, Form} from "react-bootstrap";
 
-const ClientGeneralInfo = ({title, data, readonly}) => {
+const ClientGeneralInfo = ({data, readonly}) => {
     return (
         <div className="client-general-info">
-            <div className="title">
-                <h4>
-                    {title}
-                </h4>
-            </div>
             <Form.Row>
                 <Form.Group as={Col} lg={4} controlId="shortName">
                     <Form.Label>Краткое наименование</Form.Label>

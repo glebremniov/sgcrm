@@ -1,18 +1,13 @@
 import React from "react";
-import "./ClientAddressInfo.css";
 import {Col, Form} from "react-bootstrap";
 import countryList from "react-select-country-list";
 
-const ClientAddressInfo = ({title, data = {}, readonly}) => {
+const ClientAddressInfo = ({data, buildId, readonly}) => {
     const countries = countryList().getData() || []
+
     return (
         <div className="client-address-info">
-            <div className="title">
-                <h4>
-                    {title}
-                </h4>
-            </div>
-            <Form.Group controlId="address">
+            <Form.Group controlId={buildId("address")}>
                 <Form.Label>Адрес</Form.Label>
                 <Form.Control
                     name="address"
@@ -22,7 +17,7 @@ const ClientAddressInfo = ({title, data = {}, readonly}) => {
             </Form.Group>
 
             <Form.Row>
-                <Form.Group as={Col} controlId="city">
+                <Form.Group as={Col} controlId={buildId("city")}>
                     <Form.Label>Город</Form.Label>
                     <Form.Control
                         name="city"
@@ -32,7 +27,7 @@ const ClientAddressInfo = ({title, data = {}, readonly}) => {
                     />
                 </Form.Group>
 
-                <Form.Group as={Col} controlId="country">
+                <Form.Group as={Col} controlId={buildId("country")}>
                     <Form.Label>Страна</Form.Label>
                     <Form.Control as="select"
                                   name="country"
@@ -46,7 +41,7 @@ const ClientAddressInfo = ({title, data = {}, readonly}) => {
                     </Form.Control>
                 </Form.Group>
 
-                <Form.Group as={Col} lg={3} controlId="postcode">
+                <Form.Group as={Col} lg={3} controlId={buildId("postcode")}>
                     <Form.Label>Индекс</Form.Label>
                     <Form.Control
                         name="postcode"

@@ -4,8 +4,10 @@ import DefaultPage from "../DefaultPage/DefaultPage";
 import WithDataWrapper from "../WithDataWrapper/WithDataWrapper";
 import {PathServiceContext} from "../../contexts/PathServiceContext";
 import {Button, Col, Form, Row} from "react-bootstrap";
-import ClientGeneralInfo from "../ClientInfo/ClientGeneralInfo/ClientGeneralInfo";
-import ClientAddressInfo from "../ClientInfo/ClientAddressInfo/ClientAddressInfo";
+import ClientGeneralInfo from "../ClientInfo/ClientGeneralInfo";
+import ClientAddressInfo from "../ClientInfo/ClientAddressInfo";
+import WithClientInfoWrapper from "../ClientInfo/WithClientInfoWrapper";
+import ClientPaymentInfo from "../ClientInfo/ClientPaymentInfo";
 
 const ClientDetails = ({getData}) => {
     const PathService = useContext(PathServiceContext);
@@ -53,57 +55,43 @@ const ClientDetailsView = ({data, onMount}) => {
         onMount(data)
     }, [onMount, data])
 
-
-    //                 paymentInfo: new PaymentInfo(
-    //                         bankName: "ЗАО «Альфа-Банк»",
-    //                         bankIdentificationCode: "ALFABY2X",
-    //                         payerAccountNumber: "190549007",
-    //                         checkingAccountNumber: "BY59АКВВ36329000032145100000",
-    //                 ),
-    //                 mailingAddress: new Address(
-    //                         countryISO2code: CountryCode.BY.alpha2,
-    //                         state: "Минск",
-    //                         city: "Минск",
-    //                         postcode: "220012",
-    //                         street: "ул. Притыцкого",
-    //                         buildingsNumber: "156",
-    //                         office: "29",
-    //                 ),
-    //                 legalAddress: new Address(
-    //                         countryISO2code: CountryCode.BY.alpha2,
-    //                         state: "Минск",
-    //                         city: "Минск",
-    //                         postcode: "220012",
-    //                         street: "ул. Притыцкого",
-    //                         buildingsNumber: "156",
-    //                         office: "29",
-    //                 ),
-    //                 fax: "+375173373700",
-    //                 email: "belabat@abatgroup.de",
-    //                 clientType: ClientType.ENTITY,
-    //                 webSite: "https://www.abat.de/en/belabat",
-    //                 isActive: true
-    const readonly = true
+    const readonly = false
 
     return (
         <div className="client-details-view">
             <Form>
-                <ClientGeneralInfo title="Общая информация:"
-                                   data={data}
-                                   readonly={readonly}/>
+                <WithClientInfoWrapper
+                    title="Общая информация:"
+                    data={data}
+                    readonly={readonly}
+                    Component={ClientGeneralInfo}
+                />
 
                 <Row>
                     <Col>
-                        <ClientAddressInfo title="Юридический адрес:"
-                                           data={data.legalAddress}
-                                           readonly={readonly}/>
+                        <WithClientInfoWrapper
+                            title="Юридический адрес:"
+                            id="legal-"
+                            data={data.legalAddress}
+                            readonly={readonly}
+                            Component={ClientAddressInfo}
+                        />
                     </Col>
                     <Col>
-                        <ClientAddressInfo title="Почтовый адрес:"
-                                           data={data.mailingAddress}
-                                           readonly={readonly}/>
+                        <WithClientInfoWrapper
+                            title="Почтовый адрес:"
+                            id="mailing-"
+                            data={data.mailingAddress}
+                            Component={ClientAddressInfo}
+                        />
                     </Col>
                 </Row>
+
+                <WithClientInfoWrapper
+                    title="Платежная информация:"
+                    data={data.paymentInfo}
+                    Component={ClientPaymentInfo}
+                />
 
 
                 <Button variant="primary" type="submit">
