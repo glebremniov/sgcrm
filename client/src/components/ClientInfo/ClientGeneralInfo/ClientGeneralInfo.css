@@ -1,0 +1,12 @@
+.client-general-info {
+    margin-top: 2rem;
+}
+
+.client-general-info .title {
+    color: var(--blue);
+    margin-bottom: 1rem;
+}
+
+.client-general-info label {
+    color: var(--secondary);
+}

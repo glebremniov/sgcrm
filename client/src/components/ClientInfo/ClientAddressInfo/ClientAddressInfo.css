@@ -1,0 +1,12 @@
+.client-address-info {
+    margin-top: 2rem;
+}
+
+.client-address-info .title {
+    color: var(--blue);
+    margin-bottom: 1rem;
+}
+
+.client-address-info label {
+    color: var(--secondary);
+}

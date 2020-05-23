@@ -12,7 +12,7 @@ import PathService from "../../services/Path/PathService";
 import LoginForm from "../LoginForm/LoginForm";
 import ClientsPage from "../ClientsPage/ClientsPage";
 import ApiService from "../../services/Api/ApiService";
-import {CLIENT_VERSION} from "../../config/config";
+import {APP_NAME, CLIENT_VERSION} from "../../config/config";
 import HomePage from "../HomePage/HomePage";
 import ClientDetails from "../ClientDetails/ClientDetails";
 import RoleService from "../../services/Role/RoleService";
@@ -91,7 +91,7 @@ const App = () => {
                             isAuthenticated,
                             userDetails,
                             {
-                                name: 'sgcrm',
+                                name: APP_NAME,
                                 version: CLIENT_VERSION
                             },
                             onLogout,
