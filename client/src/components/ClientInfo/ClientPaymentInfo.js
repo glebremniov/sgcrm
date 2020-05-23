@@ -1,7 +1,7 @@
 import React from "react";
 import {Col, Form} from "react-bootstrap";
 
-const ClientPaymentInfo = ({data, readonly}) => {
+const ClientPaymentInfo = ({data, buildName, onInputChange, readonly}) => {
     return (
         <div className="client-payment-info">
             <Form.Row>
@@ -10,6 +10,7 @@ const ClientPaymentInfo = ({data, readonly}) => {
                     <Form.Control name="bankName"
                                   value={data.bankName}
                                   disabled={readonly}
+                                  onChange={onInputChange}
                                   placeholder="Введите наименование банка"/>
                 </Form.Group>
 
@@ -18,6 +19,7 @@ const ClientPaymentInfo = ({data, readonly}) => {
                     <Form.Control name="bankIdentificationCode"
                                   value={data.bankIdentificationCode}
                                   disabled={readonly}
+                                  onChange={onInputChange}
                                   placeholder="Введите БИК"/>
                 </Form.Group>
             </Form.Row>
@@ -28,7 +30,7 @@ const ClientPaymentInfo = ({data, readonly}) => {
                     <Form.Control name="payerAccountNumber"
                                   value={data.payerAccountNumber}
                                   disabled={readonly}
-                                  type="payerAccountNumber"
+                                  onChange={onInputChange}
                                   placeholder="Введите УНП"/>
                 </Form.Group>
 
@@ -37,6 +39,7 @@ const ClientPaymentInfo = ({data, readonly}) => {
                     <Form.Control name="checkingAccountNumber"
                                   value={data.checkingAccountNumber}
                                   disabled={readonly}
+                                  onChange={onInputChange}
                                   placeholder="Введите рассчетный счёт"/>
                 </Form.Group>
             </Form.Row>

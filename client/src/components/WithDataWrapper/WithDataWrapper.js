@@ -8,7 +8,7 @@ const WithDataWrapper = (props) => {
 
     const {getData, filterData, Component} = props
 
-    const [data, setData] = useState([])
+    const [data, setData] = useState(null)
     const [hasLoaded, setLoaded] = useState(false)
     const [hasError, setError] = useState(false)
 
@@ -40,7 +40,7 @@ const WithDataWrapper = (props) => {
 
     }, [getData, id])
 
-    if (!hasLoaded) {
+    if (!hasLoaded || !data) {
         return <Loader/>
     }
 

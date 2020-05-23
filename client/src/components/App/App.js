@@ -18,13 +18,13 @@ import ClientDetails from "../ClientDetails/ClientDetails";
 import RoleService from "../../services/Role/RoleService";
 import Loader from "../Loader/Loader";
 import {PathServiceContext} from "../../contexts/PathServiceContext";
-import {faBox, faCalendarAlt} from "@fortawesome/free-solid-svg-icons";
+import {faBox, faCalendarAlt, faCog} from "@fortawesome/free-solid-svg-icons";
 
 const App = () => {
 
     const [userDetails, setUserDetails] = useState(AppService.getInitialUserDetails());
     const [isAuthenticated, setAuthenticated] = useState(false);
-    const [isAuthCheckPerformed, setAuthCheckPerformed] = useState(false)
+    const [isAuthCheckPerformed, setAuthCheckPerformed] = useState(false);
 
     useEffect(() => {
         const setUserRole = (role) => {
@@ -159,6 +159,7 @@ const App = () => {
                                           roles={PathService.roles().settings()}>
                                 <DefaultPage
                                     title="Настройки"
+                                    icon={faCog}
                                     breadcrumbItems={[
                                         PathService.breadcrumbs().home(),
                                         PathService.breadcrumbs().settings()

@@ -9,6 +9,11 @@ import ClientPaymentInfo from "../ClientInfo/ClientPaymentInfo";
 
 const ClientDetailsForm = ({data, onSubmit, onMount}) => {
 
+    const [generalInfo, setGeneralInfo] = useState(data)
+    const [legalAddressInfo, setLegalAddressInfo] = useState(data.legalAddress)
+    const [mailingAddressInfo, setMailingAddressInfo] = useState(data.mailingAddress)
+    const [paymentInfo, setPaymentInfo] = useState(data.paymentInfo)
+
     useEffect(() => {
         onMount(data)
     }, [onMount, data])
@@ -38,7 +43,12 @@ const ClientDetailsForm = ({data, onSubmit, onMount}) => {
         }
 
         if (!isShowMode(mode)) {
-            onSubmit(_getMethodNameByMode(mode), data)
+            onSubmit(_getMethodNameByMode(mode), {
+                ...generalInfo,
+                legalAddress: legalAddressInfo,
+                mailingAddress: mailingAddressInfo,
+                paymentInfo: paymentInfo
+            })
         }
     }
 
@@ -71,7 +81,13 @@ const ClientDetailsForm = ({data, onSubmit, onMount}) => {
                                         <FontAwesomeIcon icon={faSave}/> Сохранить
                                     </Button>
                                     <Button variant="outline-secondary"
-                                            onClick={() => setMode(modes.show)}>
+                                            onClick={() => {
+                                                setMode(modes.show)
+                                                setGeneralInfo(data)
+                                                setLegalAddressInfo(data.legalAddress)
+                                                setMailingAddressInfo(data.mailingAddress)
+                                                setPaymentInfo(data.paymentInfo)
+                                            }}>
                                         <FontAwesomeIcon icon={faBan}/>
                                     </Button>
                                 </>
@@ -83,7 +99,44 @@ const ClientDetailsForm = ({data, onSubmit, onMount}) => {
         )
     }
 
-    const readonly = isShowMode(mode)
+    const readonly = isShowMode(mode);
+
+    const onInputChange = (target, object) => {
+        if (object.hasOwnProperty(target.name)) {
+            const objectCopy = {...object}
+            objectCopy[target.name] = target.value
+            return objectCopy
+        }
+        console.error('Unknown property', target.name, object)
+    }
+
+    const onGeneralInfoInputChange = ({target}) => {
+        const copy = onInputChange(target, generalInfo);
+        if (copy) {
+            setGeneralInfo(copy)
+        }
+    }
+
+    const onLegalAddressInfoInputChange = ({target}) => {
+        const copy = onInputChange(target, legalAddressInfo);
+        if (copy) {
+            setLegalAddressInfo(copy)
+        }
+    }
+
+    const onMailingAddressInfoInputChange = ({target}) => {
+        const copy = onInputChange(target, mailingAddressInfo);
+        if (copy) {
+            setMailingAddressInfo(copy)
+        }
+    }
+
+    const onPaymentInfoInputChange = ({target}) => {
+        const copy = onInputChange(target, paymentInfo);
+        if (copy) {
+            setPaymentInfo(copy)
+        }
+    }
 
     return (
         <div className="client-details-view">
@@ -94,8 +147,9 @@ const ClientDetailsForm = ({data, onSubmit, onMount}) => {
 
                 <WithClientInfoWrapper
                     title="Общая информация:"
-                    data={data}
+                    data={generalInfo}
                     readonly={readonly}
+                    onInputChange={onGeneralInfoInputChange}
                     Component={ClientGeneralInfo}
                 />
 
@@ -103,18 +157,20 @@ const ClientDetailsForm = ({data, onSubmit, onMount}) => {
                     <Col>
                         <WithClientInfoWrapper
                             title="Юридический адрес:"
-                            id="legal-"
-                            data={data.legalAddress}
+                            id="legalAddress"
+                            data={legalAddressInfo}
                             readonly={readonly}
+                            onInputChange={onLegalAddressInfoInputChange}
                             Component={ClientAddressInfo}
                         />
                     </Col>
                     <Col>
                         <WithClientInfoWrapper
                             title="Почтовый адрес:"
-                            id="mailing-"
-                            data={data.mailingAddress}
+                            id="mailingAddress"
+                            data={mailingAddressInfo}
                             readonly={readonly}
+                            onInputChange={onMailingAddressInfoInputChange}
                             Component={ClientAddressInfo}
                         />
                     </Col>
@@ -122,8 +178,10 @@ const ClientDetailsForm = ({data, onSubmit, onMount}) => {
 
                 <WithClientInfoWrapper
                     title="Платежная информация:"
-                    data={data.paymentInfo}
+                    id="paymentInfo"
+                    data={paymentInfo}
                     readonly={readonly}
+                    onInputChange={onPaymentInfoInputChange}
                     Component={ClientPaymentInfo}
                 />
             </Form>
