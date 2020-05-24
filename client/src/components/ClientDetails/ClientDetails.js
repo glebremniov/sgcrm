@@ -5,7 +5,7 @@ import WithDataWrapper from "../WithDataWrapper/WithDataWrapper";
 import {PathServiceContext} from "../../contexts/PathServiceContext";
 import ClientDetailsForm from "../ClientDetailsForm/ClientDetailsForm";
 
-const ClientDetails = ({onSubmit, getData}) => {
+const ClientDetails = ({getData}) => {
     const PathService = useContext(PathServiceContext);
 
     const [title, setTitle] = useState('Загрузка...')
@@ -36,7 +36,6 @@ const ClientDetails = ({onSubmit, getData}) => {
                 <WithDataWrapper
                     getData={getData}
                     onMount={onViewMounted}
-                    onSubmit={onSubmit}
                     Component={ClientDetailsForm}
                 />
             </div>
