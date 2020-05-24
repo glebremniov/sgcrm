@@ -4,6 +4,7 @@ import DefaultPage from "../DefaultPage/DefaultPage";
 import WithDataWrapper from "../WithDataWrapper/WithDataWrapper";
 import {PathServiceContext} from "../../contexts/PathServiceContext";
 import ClientDetailsForm from "../ClientDetailsForm/ClientDetailsForm";
+import {faWallet} from "@fortawesome/free-solid-svg-icons";
 
 const ClientDetails = ({getData}) => {
     const PathService = useContext(PathServiceContext);
@@ -31,6 +32,7 @@ const ClientDetails = ({getData}) => {
 
     return (
         <DefaultPage title={title}
+                     icon={faWallet}
                      breadcrumbItems={breadcrumbItems}>
             <div className="client-details">
                 <WithDataWrapper
