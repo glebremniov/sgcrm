@@ -1,22 +1,13 @@
 import React, {useEffect, useState} from "react";
-import {Button, ButtonGroup, Col, Form, Row} from "react-bootstrap";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {Col, Form, Row} from "react-bootstrap";
 import {faBan, faPen, faSave, faTrashAlt} from "@fortawesome/free-solid-svg-icons";
 import WithClientInfoWrapper from "../ClientInfo/WithClientInfoWrapper";
 import ClientGeneralInfo from "../ClientInfo/ClientGeneralInfo";
 import ClientAddressInfo from "../ClientInfo/ClientAddressInfo";
 import ClientPaymentInfo from "../ClientInfo/ClientPaymentInfo";
+import ButtonBar from "../ButtonBar/ButtonBar";
 
 const ClientDetailsForm = ({data, onSubmit, onMount}) => {
-
-    const [generalInfo, setGeneralInfo] = useState(data)
-    const [legalAddressInfo, setLegalAddressInfo] = useState(data.legalAddress)
-    const [mailingAddressInfo, setMailingAddressInfo] = useState(data.mailingAddress)
-    const [paymentInfo, setPaymentInfo] = useState(data.paymentInfo)
-
-    useEffect(() => {
-        onMount(data)
-    }, [onMount, data])
 
     const modes = {
         show: 'show',
@@ -24,11 +15,30 @@ const ClientDetailsForm = ({data, onSubmit, onMount}) => {
         create: 'create'
     }
 
+    const [generalInfo, setGeneralInfo] = useState(data)
+    const [legalAddressInfo, setLegalAddressInfo] = useState(data.legalAddress)
+    const [mailingAddressInfo, setMailingAddressInfo] = useState(data.mailingAddress)
+    const [paymentInfo, setPaymentInfo] = useState(data.paymentInfo)
+    const [mode, setMode] = useState(modes.show)
+
+    useEffect(() => {
+        onMount(data)
+    }, [onMount, data])
+
     const isShowMode = (modeName) => modes[modeName] && modes[modeName] === 'show'
     const isEditMode = (modeName) => modes[modeName] && modes[modeName] === 'edit'
     const isCreateMode = (modeName) => modes[modeName] && modes[modeName] === 'create'
 
-    const [mode, setMode] = useState(modes.show)
+    const equals = (obj1, obj2) => {
+        return Object.entries(obj1).toString() === Object.entries(obj2).toString()
+    }
+
+    const clientNotChanged = () =>
+        equals(data, generalInfo) &&
+        equals(data.legalAddress, legalAddressInfo) &&
+        equals(data.mailingAddress, mailingAddressInfo) &&
+        equals(data.paymentInfo, paymentInfo)
+
 
     const onSubmitWrapper = (e) => {
         e.preventDefault()
@@ -53,53 +63,55 @@ const ClientDetailsForm = ({data, onSubmit, onMount}) => {
     }
 
     const getButtons = () => {
-        return (
-            <div className="float-right">
-                <ButtonGroup aria-label="Basic example">
-                    {
-                        isShowMode(mode) ?
-                            (
-                                <>
-                                    <Button variant="outline-primary"
-                                            type="button"
-                                            onClick={(e) => {
-                                                e.preventDefault();
-                                                setMode(modes.edit)
-                                            }}>
-                                        <FontAwesomeIcon icon={faPen}/> Изменить
-                                    </Button>
-                                    <Button variant="outline-danger">
-                                        <FontAwesomeIcon icon={faTrashAlt}/>
-                                    </Button>
-                                </>
-
-                            ) :
-                            (
-                                <>
-                                    <Button variant="primary"
-                                            type="submit">
-                                        <FontAwesomeIcon icon={faSave}/> Сохранить
-                                    </Button>
-                                    <Button variant="outline-secondary"
-                                            onClick={() => {
-                                                setMode(modes.show)
-                                                setGeneralInfo(data)
-                                                setLegalAddressInfo(data.legalAddress)
-                                                setMailingAddressInfo(data.mailingAddress)
-                                                setPaymentInfo(data.paymentInfo)
-                                            }}>
-                                        <FontAwesomeIcon icon={faBan}/>
-                                    </Button>
-                                </>
-                            )
-                    }
-                </ButtonGroup>
-            </div>
-
-        )
+        if (isShowMode(mode)) {
+            return [
+                {
+                    id: 'edit',
+                    variant: 'outline-primary',
+                    icon: faPen,
+                    label: 'Изменить',
+                    onClick: onEdit,
+                },
+                {
+                    id: 'delete',
+                    variant: 'outline-danger',
+                    icon: faTrashAlt,
+                    label: '',
+                },
+            ]
+        } else {
+            return [
+                {
+                    id: 'edit',
+                    variant: "primary",
+                    type: "submit",
+                    icon: faSave,
+                    disabled: clientNotChanged(),
+                    label: 'Сохранить',
+                },
+                {
+                    id: 'cancel',
+                    variant: "outline-secondary",
+                    icon: faBan,
+                    label: '',
+                    onClick: onCancel,
+                },
+            ]
+        }
     }
 
-    const readonly = isShowMode(mode);
+    const onEdit = (e) => {
+        e.preventDefault();
+        setMode(modes.edit)
+    }
+
+    const onCancel = () => {
+        setMode(modes.show)
+        setGeneralInfo(data)
+        setLegalAddressInfo(data.legalAddress)
+        setMailingAddressInfo(data.mailingAddress)
+        setPaymentInfo(data.paymentInfo)
+    }
 
     const onInputChange = (target, object) => {
         if (object.hasOwnProperty(target.name)) {
@@ -138,12 +150,12 @@ const ClientDetailsForm = ({data, onSubmit, onMount}) => {
         }
     }
 
+    const readonly = isShowMode(mode);
+
     return (
         <div className="client-details-view">
             <Form onSubmit={(e) => onSubmitWrapper(e)}>
-                {
-                    getButtons()
-                }
+                <ButtonBar buttons={getButtons()}/>
 
                 <WithClientInfoWrapper
                     title="Общая информация:"
