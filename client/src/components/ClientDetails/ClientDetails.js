@@ -4,8 +4,9 @@ import DefaultPage from "../DefaultPage/DefaultPage";
 import WithDataWrapper from "../WithDataWrapper/WithDataWrapper";
 import {PathServiceContext} from "../../contexts/PathServiceContext";
 import ClientDetailsForm from "../ClientDetailsForm/ClientDetailsForm";
+import {faWallet} from "@fortawesome/free-solid-svg-icons";
 
-const ClientDetails = ({onSubmit, getData}) => {
+const ClientDetails = ({getData}) => {
     const PathService = useContext(PathServiceContext);
 
     const [title, setTitle] = useState('Загрузка...')
@@ -31,12 +32,12 @@ const ClientDetails = ({onSubmit, getData}) => {
 
     return (
         <DefaultPage title={title}
+                     icon={faWallet}
                      breadcrumbItems={breadcrumbItems}>
             <div className="client-details">
                 <WithDataWrapper
                     getData={getData}
                     onMount={onViewMounted}
-                    onSubmit={onSubmit}
                     Component={ClientDetailsForm}
                 />
             </div>

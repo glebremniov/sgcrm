@@ -1,5 +1,6 @@
 import {SERVER_URL} from "../../config/config";
 import {headers} from "../../utils/headers";
+import {checkResponseStatus} from "../../handlers/responseHandlers";
 
 export default {
 
@@ -48,6 +49,20 @@ export default {
 
     getClient(id) {
         return _getResource(buildUri(`/api/client/${id}`))
+    },
+
+    saveClient(client) {
+        return fetchWrapper(buildUri('/api/client/'), {
+            method: 'post',
+            body: JSON.stringify(client)
+        }).then(checkResponseStatus)
+    },
+
+    updateClient(id, client) {
+        return fetchWrapper(buildUri(`/api/client/${id}`), {
+            method: 'put',
+            body: JSON.stringify(client)
+        }).then(checkResponseStatus)
     }
 };
 
