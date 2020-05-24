@@ -6,8 +6,10 @@ import ClientGeneralInfo from "../ClientInfo/ClientGeneralInfo";
 import ClientAddressInfo from "../ClientInfo/ClientAddressInfo";
 import ClientPaymentInfo from "../ClientInfo/ClientPaymentInfo";
 import ButtonBar from "../ButtonBar/ButtonBar";
+import ApiService from "../../services/Api/ApiService";
+import AlertSuccess from "../AlertSuccess/AlertSuccess";
 
-const ClientDetailsForm = ({data, onSubmit, onMount}) => {
+const ClientDetailsForm = ({data, reload, onMount}) => {
 
     const modes = {
         show: 'show',
@@ -20,14 +22,15 @@ const ClientDetailsForm = ({data, onSubmit, onMount}) => {
     const [mailingAddressInfo, setMailingAddressInfo] = useState(data.mailingAddress)
     const [paymentInfo, setPaymentInfo] = useState(data.paymentInfo)
     const [mode, setMode] = useState(modes.show)
+    const [showAlertSuccess, setShowAlertSuccess] = useState(false)
 
     useEffect(() => {
         onMount(data)
     }, [onMount, data])
 
-    const isShowMode = (modeName) => modes[modeName] && modes[modeName] === 'show'
-    const isEditMode = (modeName) => modes[modeName] && modes[modeName] === 'edit'
-    const isCreateMode = (modeName) => modes[modeName] && modes[modeName] === 'create'
+    const isShowMode = (modeName) => modes[modeName] && modes[modeName] === modes.show
+    const isEditMode = (modeName) => modes[modeName] && modes[modeName] === modes.edit
+    const isCreateMode = (modeName) => modes[modeName] && modes[modeName] === modes.create
 
     const equals = (obj1, obj2) => {
         return Object.entries(obj1).toString() === Object.entries(obj2).toString()
@@ -43,22 +46,37 @@ const ClientDetailsForm = ({data, onSubmit, onMount}) => {
     const onSubmitWrapper = (e) => {
         e.preventDefault()
 
-        const _getMethodNameByMode = (mode) => {
-            if (isEditMode(mode)) {
-                return 'put'
-            } else if (isCreateMode(mode)) {
-                return 'post'
-            }
-            return null
+        const onSuccess = (json) => {
+            setShowAlertSuccess(true)
+            setMode(modes.show)
+            reload()
+            window.scrollTo(0, 0)
+        }
+
+        const onError = (error) => {
+            console.error(e)
+            setShowAlertSuccess(false)
         }
 
         if (!isShowMode(mode)) {
-            onSubmit(_getMethodNameByMode(mode), {
+            const client = {
                 ...generalInfo,
                 legalAddress: legalAddressInfo,
                 mailingAddress: mailingAddressInfo,
                 paymentInfo: paymentInfo
-            })
+            }
+
+            if (isCreateMode(mode)) {
+                console.debug('post')
+                ApiService.saveClient(client)
+                    .then(onSuccess)
+                    .catch(onError)
+
+            } else if (isEditMode(mode)) {
+                ApiService.updateClient(client.id, client)
+                    .then(onSuccess)
+                    .catch(onError)
+            }
         }
     }
 
@@ -68,14 +86,18 @@ const ClientDetailsForm = ({data, onSubmit, onMount}) => {
                 {
                     id: 'edit',
                     variant: 'outline-primary',
+                    type: 'button',
                     icon: faPen,
+                    tooltip: '',
                     label: 'Изменить',
-                    onClick: onEdit,
+                    onClick: () => setMode(modes.edit),
                 },
                 {
                     id: 'delete',
                     variant: 'outline-danger',
+                    type: 'button',
                     icon: faTrashAlt,
+                    tooltip: 'Удалить',
                     label: '',
                 },
             ]
@@ -87,22 +109,20 @@ const ClientDetailsForm = ({data, onSubmit, onMount}) => {
                     type: "submit",
                     icon: faSave,
                     disabled: clientNotChanged(),
+                    tooltip: '',
                     label: 'Сохранить',
                 },
                 {
                     id: 'cancel',
                     variant: "outline-secondary",
+                    type: "reset",
                     icon: faBan,
                     label: '',
+                    tooltip: 'Отменить',
                     onClick: onCancel,
                 },
             ]
         }
-    }
-
-    const onEdit = (e) => {
-        e.preventDefault();
-        setMode(modes.edit)
     }
 
     const onCancel = () => {
@@ -154,6 +174,14 @@ const ClientDetailsForm = ({data, onSubmit, onMount}) => {
 
     return (
         <div className="client-details-view">
+
+            {
+                showAlertSuccess ? (
+                    <AlertSuccess title="Данные успешно сохранены!"
+                                  setShow={setShowAlertSuccess}/>
+                ) : null
+            }
+
             <Form onSubmit={(e) => onSubmitWrapper(e)}>
                 <ButtonBar buttons={getButtons()}/>
 

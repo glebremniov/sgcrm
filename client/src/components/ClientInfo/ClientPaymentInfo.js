@@ -1,13 +1,14 @@
 import React from "react";
 import {Col, Form} from "react-bootstrap";
 
-const ClientPaymentInfo = ({data, buildName, onInputChange, readonly}) => {
+const ClientPaymentInfo = ({data, onInputChange, readonly}) => {
     return (
         <div className="client-payment-info">
             <Form.Row>
                 <Form.Group as={Col} controlId="bankName">
                     <Form.Label>Наименование банка</Form.Label>
                     <Form.Control name="bankName"
+                                  required
                                   value={data.bankName}
                                   disabled={readonly}
                                   onChange={onInputChange}
@@ -17,6 +18,7 @@ const ClientPaymentInfo = ({data, buildName, onInputChange, readonly}) => {
                 <Form.Group as={Col} lg={4} controlId="bankIdentificationCode">
                     <Form.Label>БИК</Form.Label>
                     <Form.Control name="bankIdentificationCode"
+                                  required
                                   value={data.bankIdentificationCode}
                                   disabled={readonly}
                                   onChange={onInputChange}
@@ -28,6 +30,7 @@ const ClientPaymentInfo = ({data, buildName, onInputChange, readonly}) => {
                 <Form.Group as={Col} controlId="payerAccountNumber">
                     <Form.Label>Уникальный номер плательщика (УНП)</Form.Label>
                     <Form.Control name="payerAccountNumber"
+                                  required
                                   value={data.payerAccountNumber}
                                   disabled={readonly}
                                   onChange={onInputChange}
@@ -37,6 +40,7 @@ const ClientPaymentInfo = ({data, buildName, onInputChange, readonly}) => {
                 <Form.Group as={Col} controlId="checkingAccountNumber">
                     <Form.Label>Рассчетный счёт</Form.Label>
                     <Form.Control name="checkingAccountNumber"
+                                  required
                                   value={data.checkingAccountNumber}
                                   disabled={readonly}
                                   onChange={onInputChange}

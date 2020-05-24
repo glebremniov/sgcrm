@@ -76,7 +76,22 @@ const App = () => {
     }
 
     const onClientDetailsSubmit = (method, data) => {
-        console.debug('submit clientDetails', method, data)
+        console.debug('submit clientDetailsForm', method, data)
+        if (method === 'post') {
+            console.debug('post')
+            ApiService.saveClient(data)
+                .then(json => console.log('resp', json))
+                .catch(console.error)
+
+        } else if (method === 'put') {
+            console.debug('put')
+            ApiService.updateClient(data.id, data)
+                .then(json => console.log('resp', json))
+                .catch(console.error)
+        } else {
+            console.error('Unknown method', method)
+        }
+
     }
 
     if (!isAuthCheckPerformed) {

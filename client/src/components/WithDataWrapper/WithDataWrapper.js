@@ -14,6 +14,34 @@ const WithDataWrapper = (props) => {
 
     const {id} = useParams()
 
+    const onSuccess = (data) => {
+        setLoaded(true)
+        setError(false)
+        setData(data)
+    }
+
+    const onError = (error) => {
+        console.error(error)
+        setLoaded(true)
+        setError(true)
+    }
+
+    const getDataWrapper = () => {
+        if (id) {
+            getData(id)
+                .then(onSuccess)
+                .catch(onError)
+        } else {
+            getData()
+                .then(onSuccess)
+                .catch(onError)
+        }
+    }
+
+    const reload = () => {
+        getDataWrapper()
+    }
+
     useEffect(() => {
         const onSuccess = (data) => {
             setLoaded(true)
@@ -37,7 +65,6 @@ const WithDataWrapper = (props) => {
                 .catch(onError)
         }
 
-
     }, [getData, id])
 
     if (!hasLoaded || !data) {
@@ -49,7 +76,9 @@ const WithDataWrapper = (props) => {
     }
 
     return (
-        <Component {...props} data={filterData(data)}/>
+        <Component {...props}
+                   reload={reload}
+                   data={filterData(data)}/>
     )
 }
 

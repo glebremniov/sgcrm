@@ -1,6 +1,7 @@
 import React from "react";
 import {Button, ButtonGroup} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import TooltipWrapper from "../TooltipWrapper/TooltipWrapper";
 
 const ButtonBar = ({buttons}) => {
 
@@ -9,9 +10,11 @@ const ButtonBar = ({buttons}) => {
             <ButtonGroup aria-label="Basic example">
                 {
                     buttons.map(btn => (
-                        <Button key={btn.id} {...btn}>
-                            <FontAwesomeIcon icon={btn.icon}/> {btn.label}
-                        </Button>
+                        <TooltipWrapper key={btn.id} label={btn.tooltip}>
+                            <Button {...btn}>
+                                <FontAwesomeIcon icon={btn.icon}/> {btn.label}
+                            </Button>
+                        </TooltipWrapper>
                     ))
                 }
             </ButtonGroup>

@@ -11,6 +11,7 @@ const ClientAddressInfo = ({data, buildId, onInputChange, readonly}) => {
                 <Form.Label>Адрес</Form.Label>
                 <Form.Control
                     name="addressString"
+                    required
                     value={data.addressString}
                     disabled={readonly}
                     onChange={onInputChange}
@@ -23,6 +24,7 @@ const ClientAddressInfo = ({data, buildId, onInputChange, readonly}) => {
                     <Form.Control
                         name="city"
                         value={data.city}
+                        required
                         disabled={readonly}
                         onChange={onInputChange}
                         placeholder="Введите город"
@@ -32,6 +34,7 @@ const ClientAddressInfo = ({data, buildId, onInputChange, readonly}) => {
                 <Form.Group as={Col} controlId={buildId("countryISO2code")}>
                     <Form.Label>Страна</Form.Label>
                     <Form.Control as="select"
+                                  required
                                   name="countryISO2code"
                                   disabled={readonly}
                                   onChange={onInputChange}
@@ -48,6 +51,7 @@ const ClientAddressInfo = ({data, buildId, onInputChange, readonly}) => {
                     <Form.Label>Индекс</Form.Label>
                     <Form.Control
                         name="postcode"
+                        required
                         value={data.postcode}
                         disabled={readonly}
                         onChange={onInputChange}

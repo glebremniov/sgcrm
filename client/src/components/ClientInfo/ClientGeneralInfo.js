@@ -8,6 +8,7 @@ const ClientGeneralInfo = ({data, readonly, onInputChange}) => {
                 <Form.Group as={Col} lg={4} controlId="shortName">
                     <Form.Label>Краткое наименование</Form.Label>
                     <Form.Control name="shortName"
+                                  required
                                   value={data.shortName}
                                   disabled={readonly}
                                   onChange={onInputChange}
@@ -17,6 +18,7 @@ const ClientGeneralInfo = ({data, readonly, onInputChange}) => {
                 <Form.Group as={Col} controlId="fullName">
                     <Form.Label>Полное наименование</Form.Label>
                     <Form.Control name="fullName"
+                                  required
                                   value={data.fullName}
                                   disabled={readonly}
                                   onChange={onInputChange}
@@ -38,6 +40,7 @@ const ClientGeneralInfo = ({data, readonly, onInputChange}) => {
                 <Form.Group as={Col} controlId="phone">
                     <Form.Label>Телефон</Form.Label>
                     <Form.Control name="phone"
+                                  required
                                   value={data.phone}
                                   disabled={readonly}
                                   onChange={onInputChange}
