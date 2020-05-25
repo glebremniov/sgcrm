@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext} from "react";
 import "./ToolBar.css"
 import PropTypes from 'prop-types';
 import ToolBarItem from "../ToolBarItem/ToolBarItem";
@@ -6,6 +6,7 @@ import ToolBarBrandItem from "../ToolBarBrandItem/ToolBarBrandItem";
 import ToolBarLogOutItem from "../ToolBarLogOutItem/ToolBarLogOutItem";
 import {useLocation} from "react-router-dom";
 import StatusBar from "../../StatusBar/StatusBar";
+import {UserDetailsContext} from "../../../contexts/UserDetailsContext";
 
 const ToolBar = (props) => {
 
@@ -15,11 +16,11 @@ const ToolBar = (props) => {
         statusBarProps,
         topItems,
         bottomItems,
-        isAuthenticated,
         isPathActive,
     } = props;
 
     const activePath = useLocation().pathname;
+    const userDetails = useContext(UserDetailsContext)
 
     const transformToolBarItems = (toolBarItems) =>
         toolBarItems.map(itemProps =>
@@ -38,7 +39,7 @@ const ToolBar = (props) => {
                     transformToolBarItems(bottomItems)
                 }
                 {
-                    isAuthenticated ? <ToolBarLogOutItem {...logOutItemProps}/> : null
+                    userDetails.isAuthenticated ? <ToolBarLogOutItem {...logOutItemProps}/> : null
                 }
                 <StatusBar {...statusBarProps}/>
             </div>

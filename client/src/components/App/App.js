@@ -25,7 +25,6 @@ import {defaultErrorHandler} from "../../handlers/errorHandlers";
 const App = () => {
 
     const [userDetails, setUserDetails] = useState(AppService.getInitialUserDetails());
-    const [isAuthenticated, setAuthenticated] = useState(false);
     const [isLoginRequestSending, setLoginRequestSending] = useState(false);
 
     const checkAuth = useCallback(() => {
@@ -35,30 +34,36 @@ const App = () => {
 
         setLoginRequestSending(true)
 
-        const setUserRole = (role) => {
+        const setDetails = (role, isAuthenticated) => {
+            let userDetailsDelta = {}
+
             if (userDetails.role !== role) {
-                setUserDetails({...userDetails, role})
+                userDetailsDelta.role = role
+            }
+
+            if (userDetails.isAuthenticated !== isAuthenticated) {
+                userDetailsDelta.isAuthenticated = isAuthenticated
+            }
+
+            if (userDetailsDelta.role || userDetailsDelta.isAuthenticated) {
+                setUserDetails({...userDetails, ...userDetailsDelta})
             }
         }
 
         if (AuthService.checkIsTokenExists()) {
             AuthService.checkAuthEndpoint()
-                .then(response => {
-                    setAuthenticated(true);
-                    setUserRole(AuthService.getRole());
+                .then(() => {
+                    setDetails(AuthService.getRole(), true)
                 })
                 .catch(e => {
-                    setAuthenticated(false);
-                    setUserRole(RoleService.anonymous());
+                    setDetails(RoleService.anonymous(), false)
                     console.error('There has been a problem with your fetch operation: ', e.message);
                 })
         } else {
-            console.error('token not exists')
-            setAuthenticated(false);
-            setUserRole(RoleService.anonymous())
+            setDetails(RoleService.anonymous(), false)
         }
         setLoginRequestSending(false)
-    }, [isLoginRequestSending, userDetails, setAuthenticated])
+    }, [isLoginRequestSending, userDetails])
 
 
     useEffect(() => {
@@ -87,7 +92,6 @@ const App = () => {
 
     const onLogout = () => {
         AuthService.removeToken();
-        setAuthenticated(false)
         setUserDetails(AppService.getInitialUserDetails())
     };
 
@@ -98,14 +102,10 @@ const App = () => {
     return (
         <div className="app">
             <PathServiceContext.Provider value={PathService}>
-                <UserDetailsContext.Provider value={{
-                    username: userDetails.username,
-                    role: userDetails.role
-                }}>
+                <UserDetailsContext.Provider value={{...userDetails, password: undefined}}>
                     <Router history={history}>
 
                         <ToolBar {...AppService.getToolBarProps(
-                            isAuthenticated,
                             userDetails,
                             {
                                 name: APP_NAME,
