@@ -1,19 +1,20 @@
 import {checkResponseStatus} from "../../handlers/responseHandlers";
 import * as qs from "qs";
 import ApiService, {buildUri, fetchWrapper} from "../Api/ApiService";
-import RoleService from "../Role/RoleService";
 
 const {login: URI_LOGIN, refreshToken: URI_REFRESH_TOKEN} = ApiService.pathNames()
 
 export default {
 
-    getRole() {
-        const authObject = JSON.parse(localStorage.auth);
-        const anonymousRole = RoleService.anonymous()
-        if (authObject && authObject.roles) {
-            const {roles} = authObject;
-            if (Array.isArray(roles) && roles.length > 0) {
-                return RoleService.isRoleValid(roles[0]) ? roles[0] : anonymousRole;
+    getCurrentRole() {
+        if (localStorage.auth) {
+            const auth = JSON.parse(localStorage.auth);
+            
+            if (auth && auth.roles) {
+                const {roles} = auth;
+                if (Array.isArray(roles) && roles.length > 0) {
+                    return roles[0];
+                }
             }
         }
 

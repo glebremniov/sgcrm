@@ -5,14 +5,13 @@ import PropTypes from "prop-types";
 import AlertDanger from "../AlertDanger/AlertDanger";
 
 const WithDataWrapper = (props) => {
-
     const {getData, filterData, Component} = props
+    
+    const {id} = useParams()
 
     const [data, setData] = useState(null)
     const [hasLoaded, setLoaded] = useState(false)
     const [hasError, setError] = useState(false)
-
-    const {id} = useParams()
 
     const getDataWrapper = useCallback(() => {
         const onSuccess = (data) => {

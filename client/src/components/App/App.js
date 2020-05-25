@@ -53,7 +53,7 @@ const App = () => {
         if (AuthService.checkIsTokenExists()) {
             AuthService.checkAuthEndpoint()
                 .then(() => {
-                    setDetails(AuthService.getRole(), true)
+                    setDetails(AuthService.getCurrentRole(), true)
                 })
                 .catch(e => {
                     setDetails(RoleService.anonymous(), false)

@@ -38,7 +38,7 @@ export default {
         return {
             username: '',
             password: '',
-            role: AuthService.getRole() || RoleService.anonymous(),
+            role: AuthService.getCurrentRole() || RoleService.anonymous(),
             isAuthenticated: false
         }
     },
