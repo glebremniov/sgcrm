@@ -22,10 +22,10 @@ class Client {
     String fax
     String email
 
-    ClientType clientType
+    ClientType clientType = ClientType.ENTITY
     String webSite
 
-    boolean isActive
+    boolean isActive = true
 
     CustomerPriority customerPriority = CustomerPriority.BASIC
     DiscountPriority discountPriority = DiscountPriority.ZERO

@@ -96,7 +96,16 @@ const App = () => {
     };
 
     const filterClients = (dataArr) => {
-        return dataArr.sort(it => it.isActive ? -1 : 1)
+        return dataArr.sort((a, b) => {
+            if (a.shortName > b.shortName) {
+                return 1;
+            }
+            if (a.shortName < b.shortName) {
+                return -1;
+            }
+            
+            return 0;
+        })
     }
 
     return (

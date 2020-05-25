@@ -10,6 +10,7 @@ import ApiService from "../../services/Api/ApiService";
 import AlertSuccess from "../AlertSuccess/AlertSuccess";
 import AlertDanger from "../AlertDanger/AlertDanger";
 import {PathServiceContext} from "../../contexts/PathServiceContext";
+import history from "../../history";
 
 const ClientDetailsForm = ({data, reload, onMount}) => {
 
@@ -95,7 +96,9 @@ const ClientDetailsForm = ({data, reload, onMount}) => {
 
             if (isCreateMode(mode)) {
                 ApiService.saveClient(client)
-                    .then(onSuccess)
+                    .then(response => response.json()
+                        .then(({id}) =>
+                            history.push(PathService.buildPathToClient(id))))
                     .catch(onError)
 
             } else if (isEditMode(mode)) {
@@ -274,13 +277,13 @@ ClientDetailsForm.defaultProps = {
         legalAddress: {
             addressString: "",
             city: "",
-            countryISO2code: "",
+            countryISO2code: "BY",
             postcode: "",
         },
         mailingAddress: {
             addressString: "",
             city: "",
-            countryISO2code: "",
+            countryISO2code: "BY",
             postcode: "",
         },
         paymentInfo: {

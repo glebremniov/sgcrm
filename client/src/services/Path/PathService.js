@@ -26,7 +26,7 @@ const _PATH_DATA = {
         ],
     },
     NEW_CLIENT: {
-        path: HOME_PATH + "/clients/new",
+        path: HOME_PATH + "/newClient",
         roles: [
             RoleService.admin(),
             RoleService.manager(),
@@ -91,6 +91,9 @@ export default {
     calendar: () => _PATH_DATA.WORKERS.path,
     settings: () => _PATH_DATA.SETTINGS.path,
     login: () => _PATH_DATA.LOGIN.path,
+
+    buildPathToClient: (id) => String(_PATH_DATA.CLIENT.path)
+        .replace(':id', id),
 
     roles: () => {
         return {
