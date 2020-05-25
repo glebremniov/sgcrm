@@ -1,0 +1,13 @@
+.toolbar-authentication-item {
+    cursor: pointer;
+}
+
+.toolbar-authentication-item.login svg {
+    opacity: 1;
+    color: var(--green);
+}
+
+.toolbar-authentication-item.logout svg {
+    opacity: 1;
+    color: var(--danger);
+}

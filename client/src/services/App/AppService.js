@@ -9,13 +9,15 @@ export default {
     getToolBarProps(userDetails, appInfo, logoutHandler) {
         const topItems = toolBarService.getTopToolBarItems(userDetails.role)
         const bottomItems = toolBarService.getBottomToolBarItems(userDetails.role)
-        const logOutItemProps = toolBarService.getToolBarLogOutItemProps(logoutHandler)
+        const logoutItemProps = toolBarService.getLogoutItemProps(logoutHandler)
+        const loginItemProps = toolBarService.getLoginItemProps(PathService.login())
 
         return {
             brandItemProps: {
                 appName: appInfo.name.toLowerCase(),
             },
-            logOutItemProps,
+            logoutItemProps,
+            loginItemProps,
             topItems,
             bottomItems,
             statusBarProps: {

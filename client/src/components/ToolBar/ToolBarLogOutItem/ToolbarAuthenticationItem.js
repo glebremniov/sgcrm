@@ -1,12 +1,12 @@
 import React from "react";
 import classNames from "classnames";
 
-import "./ToolBarLogOutItem.css";
+import "./ToolbarAuthenticationItem.css";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
-const ToolBarLogOutItem = ({label, faIcon, onClick, className}) => {
+const ToolbarAuthenticationItem = ({label, faIcon, onClick, className}) => {
     const getClassNames = () =>
-        classNames('tool-bar-item', 'tool-bar-log-out-item', ...className)
+        classNames('tool-bar-item', 'toolbar-authentication-item', ...className)
 
     return (
         <div className={getClassNames()} onClick={onClick}>
@@ -15,4 +15,4 @@ const ToolBarLogOutItem = ({label, faIcon, onClick, className}) => {
     )
 };
 
-export default ToolBarLogOutItem
+export default ToolbarAuthenticationItem

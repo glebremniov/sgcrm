@@ -2,15 +2,37 @@ import {
     faBox,
     faCalendarAlt,
     faCog,
-    faHome,
+    faHome, faSignInAlt,
     faSignOutAlt,
     faUserTie,
     faWallet
 } from "@fortawesome/free-solid-svg-icons";
 import PathService from "../Path/PathService";
 import RoleService from "../Role/RoleService";
+import history from "../../history";
 
 export default class ToolBarService {
+
+    getLoginItemProps = (href, label = 'Войти') => {
+        return {
+            id: 'authenticationItem',
+            label,
+            faIcon: faSignInAlt,
+            onClick: () => history.push(href),
+            className: 'login'
+        }
+    }
+
+    getLogoutItemProps = (onLogOut, label = 'Выйти') => {
+        return {
+            id: 'logout',
+            label,
+            faIcon: faSignOutAlt,
+            onClick: onLogOut,
+            className: 'logout',
+        }
+    };
+
     getToolBarLogOutItemProps = (onLogOut, label = 'Выйти') => {
         return {
             id: 'logout',
@@ -85,7 +107,7 @@ export default class ToolBarService {
     }
 
     getBottomToolBarItems = (role) => {
-        return role ? [
+        return role !== RoleService.anonymous() ? [
             {
                 id: 'settings',
                 label: 'Настройки',
