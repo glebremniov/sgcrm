@@ -1,7 +1,6 @@
-import {checkResponseStatus, loginResponseHandler} from "../../handlers/responseHandlers";
+import {checkResponseStatus} from "../../handlers/responseHandlers";
 import * as qs from "qs";
 import ApiService, {buildUri, fetchWrapper} from "../Api/ApiService";
-import {defaultErrorHandler} from "../../handlers/errorHandlers";
 import RoleService from "../Role/RoleService";
 
 const {login: URI_LOGIN, refreshToken: URI_REFRESH_TOKEN} = ApiService.pathNames()
@@ -22,7 +21,7 @@ export default {
     },
 
     login(userDetails) {
-        fetch(buildUri(URI_LOGIN), {
+        return fetch(buildUri(URI_LOGIN), {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -30,8 +29,6 @@ export default {
             },
             body: JSON.stringify(userDetails)
         }).then(checkResponseStatus)
-            .then(loginResponseHandler)
-            .catch(defaultErrorHandler);
     },
 
     writeToken(auth) {

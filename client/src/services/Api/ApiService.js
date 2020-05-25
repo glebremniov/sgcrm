@@ -19,6 +19,7 @@ export default {
     },
 
     saveClient(client) {
+        console.log(client)
         return fetchWrapper(buildUri('/api/client/'), {
             method: 'post',
             body: JSON.stringify(client)

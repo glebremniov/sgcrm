@@ -25,6 +25,13 @@ const _PATH_DATA = {
             RoleService.manager(),
         ],
     },
+    NEW_CLIENT: {
+        path: HOME_PATH + "/clients/new",
+        roles: [
+            RoleService.admin(),
+            RoleService.manager(),
+        ],
+    },
     CLIENT: {
         path: HOME_PATH + "/clients/:id",
         roles: [
@@ -77,6 +84,7 @@ const _isPathExists = path =>
 export default {
     home: () => _PATH_DATA.HOME.path,
     clients: () => _PATH_DATA.CLIENTS.path,
+    newClient: () => _PATH_DATA.NEW_CLIENT.path,
     client: () => _PATH_DATA.CLIENT.path,
     operations: () => _PATH_DATA.OPERATIONS.path,
     workers: () => _PATH_DATA.WORKERS.path,
@@ -88,6 +96,7 @@ export default {
         return {
             home: () => _PATH_DATA.HOME.roles,
             clients: () => _PATH_DATA.CLIENTS.roles,
+            newClient: () => _PATH_DATA.NEW_CLIENT.roles,
             client: () => _PATH_DATA.CLIENT.roles,
             operations: () => _PATH_DATA.OPERATIONS.roles,
             workers: () => _PATH_DATA.WORKERS.roles,
@@ -109,6 +118,12 @@ export default {
                 return {
                     label: 'Клиенты',
                     href: _PATH_DATA.CLIENTS.path,
+                }
+            },
+            newClient: () => {
+                return {
+                    label: 'Новый клиент',
+                    href: _PATH_DATA.NEW_CLIENT.path,
                 }
             },
             client: (id, title) => {

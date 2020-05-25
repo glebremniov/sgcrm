@@ -1,9 +1,14 @@
-import React from "react";
+import React, {useContext} from "react";
 import {Alert} from "react-bootstrap";
 import {faExclamationCircle} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {PathServiceContext} from "../../contexts/PathServiceContext";
+import {Link} from "react-router-dom";
 
 const AlertDanger = ({title, text, setShow, redirectPath}) => {
+
+    const PathService = useContext(PathServiceContext)
+
     return (
         <Alert variant="danger"
                onClose={() => setShow(false)}
@@ -15,16 +20,13 @@ const AlertDanger = ({title, text, setShow, redirectPath}) => {
                 {
                     text
                 }
-                {
-                    redirectPath ?
-                        <>
-                            <hr/>
-                            <div>
-                                Вы можете вернуться на <Alert.Link
-                                href={redirectPath}>главную</Alert.Link> страницу.
-                            </div>
-                        </> : null
-                }
+                <hr/>
+                <div>
+                    Вы можете вернуться на <Alert.Link
+                    as={Link}
+                    to={redirectPath || PathService.home()}
+                >главную</Alert.Link> страницу.
+                </div>
             </div>
         </Alert>
     );
@@ -33,7 +35,6 @@ const AlertDanger = ({title, text, setShow, redirectPath}) => {
 AlertDanger.defaultProps = {
     title: "Во время последней операции произошла ошибка.",
     text: 'Наша команда уже работает над решением возникшей проблемы.',
-    redirectPath: '/'
 }
 
 export default AlertDanger

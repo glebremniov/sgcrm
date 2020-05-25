@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {Col, Form, Row} from "react-bootstrap";
 import {faBan, faPen, faSave, faTrashAlt} from "@fortawesome/free-solid-svg-icons";
 import WithClientInfoWrapper from "../ClientInfo/WithClientInfoWrapper";
@@ -9,8 +9,11 @@ import ButtonBar from "../ButtonBar/ButtonBar";
 import ApiService from "../../services/Api/ApiService";
 import AlertSuccess from "../AlertSuccess/AlertSuccess";
 import AlertDanger from "../AlertDanger/AlertDanger";
+import {PathServiceContext} from "../../contexts/PathServiceContext";
 
 const ClientDetailsForm = ({data, reload, onMount}) => {
+
+    const PathService = useContext(PathServiceContext)
 
     const modes = {
         show: 'show',
@@ -30,7 +33,10 @@ const ClientDetailsForm = ({data, reload, onMount}) => {
 
     useEffect(() => {
         onMount(data)
-    }, [onMount, data])
+        if (!data.id && mode !== modes.create) {
+            setMode(modes.create)
+        }
+    }, [onMount, data, mode, modes.create])
 
     const isShowMode = (modeName) => modes[modeName] && modes[modeName] === modes.show
     const isEditMode = (modeName) => modes[modeName] && modes[modeName] === modes.edit
@@ -88,7 +94,6 @@ const ClientDetailsForm = ({data, reload, onMount}) => {
             }
 
             if (isCreateMode(mode)) {
-                console.debug('post')
                 ApiService.saveClient(client)
                     .then(onSuccess)
                     .catch(onError)
@@ -257,6 +262,34 @@ const ClientDetailsForm = ({data, reload, onMount}) => {
             </Form>
         </div>
     )
+}
+
+ClientDetailsForm.defaultProps = {
+    data: {
+        shortName: "",
+        fullName: "",
+        phone: "",
+        email: "",
+        fax: "",
+        legalAddress: {
+            addressString: "",
+            city: "",
+            countryISO2code: "",
+            postcode: "",
+        },
+        mailingAddress: {
+            addressString: "",
+            city: "",
+            countryISO2code: "",
+            postcode: "",
+        },
+        paymentInfo: {
+            bankIdentificationCode: "",
+            bankName: "",
+            checkingAccountNumber: "",
+            payerAccountNumber: "",
+        }
+    }
 }
 
 export default ClientDetailsForm

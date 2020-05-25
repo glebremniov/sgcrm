@@ -1,21 +1,16 @@
-import Auth from '../services/Auth/AuthService';
 import PathService from "../services/Path/PathService";
+import history from '../history';
 
 export const checkResponseStatus = response => {
     if (response.ok) {
         return response
     } else {
+        if (isNotAuthorizedError(response)) {
+            history.push(PathService.login())
+        }
         let error = new Error(response.statusText);
         error.response = response;
         throw error;
     }
 };
-
-export const loginResponseHandler = response => {
-    response.json()
-        .then(json => {
-            Auth.writeToken(json);
-            window.location.pathname = PathService.home()
-        })
-        .catch(console.error)
-};
+export const isNotAuthorizedError = response => response.status === 401

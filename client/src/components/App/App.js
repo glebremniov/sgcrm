@@ -1,12 +1,13 @@
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import "./App.css";
 import AppService from "../../services/App/AppService";
 import ToolBar from "../ToolBar/ToolBar/ToolBar";
-import {BrowserRouter} from "react-router-dom";
+import {Router} from "react-router-dom";
 import {UserDetailsContext} from "../../contexts/UserDetailsContext"
 import DefaultPage from "../DefaultPage/DefaultPage";
 import Panel from "../Panel/Panel";
 import AuthService from "../../services/Auth/AuthService";
+import Auth from "../../services/Auth/AuthService";
 import RouteWrapper from "../RouteWrapper/RouteWrapper";
 import PathService from "../../services/Path/PathService";
 import LoginForm from "../LoginForm/LoginForm";
@@ -16,17 +17,24 @@ import {APP_NAME, CLIENT_VERSION} from "../../config/config";
 import HomePage from "../HomePage/HomePage";
 import ClientDetails from "../ClientDetails/ClientDetails";
 import RoleService from "../../services/Role/RoleService";
-import Loader from "../Loader/Loader";
 import {PathServiceContext} from "../../contexts/PathServiceContext";
 import {faBox, faCalendarAlt, faCog} from "@fortawesome/free-solid-svg-icons";
+import history from "../../history";
+import {defaultErrorHandler} from "../../handlers/errorHandlers";
 
 const App = () => {
 
     const [userDetails, setUserDetails] = useState(AppService.getInitialUserDetails());
     const [isAuthenticated, setAuthenticated] = useState(false);
-    const [isAuthCheckPerformed, setAuthCheckPerformed] = useState(false);
+    const [isLoginRequestSending, setLoginRequestSending] = useState(false);
 
-    useEffect(() => {
+    const checkAuth = useCallback(() => {
+        if (isLoginRequestSending) {
+            return
+        }
+
+        setLoginRequestSending(true)
+
         const setUserRole = (role) => {
             if (userDetails.role !== role) {
                 setUserDetails({...userDetails, role})
@@ -38,21 +46,24 @@ const App = () => {
                 .then(response => {
                     setAuthenticated(true);
                     setUserRole(AuthService.getRole());
-                    setAuthCheckPerformed(true);
                 })
                 .catch(e => {
                     setAuthenticated(false);
                     setUserRole(RoleService.anonymous());
-                    setAuthCheckPerformed(true);
                     console.error('There has been a problem with your fetch operation: ', e.message);
                 })
         } else {
-            setAuthCheckPerformed(true);
+            console.error('token not exists')
             setAuthenticated(false);
             setUserRole(RoleService.anonymous())
         }
+        setLoginRequestSending(false)
+    }, [isLoginRequestSending, userDetails, setAuthenticated])
 
-    }, [userDetails])
+
+    useEffect(() => {
+        checkAuth()
+    }, [checkAuth])
 
     const onLoginFormInputChange = ({target}) => {
         const newUserDetails = {...userDetails}
@@ -63,6 +74,15 @@ const App = () => {
     const onLoginFormSubmit = (event) => {
         event.preventDefault()
         AuthService.login(userDetails)
+            .then(resp => resp.json()
+                .then(json => {
+                    Auth.writeToken(json);
+                    history.push(PathService.home())
+                    checkAuth()
+                })
+                .catch(console.error))
+            .catch(defaultErrorHandler);
+
     }
 
     const onLogout = () => {
@@ -72,11 +92,7 @@ const App = () => {
     };
 
     const filterClients = (dataArr) => {
-        return [...dataArr].sort(it => it.isActive ? -1 : 1)
-    }
-
-    if (!isAuthCheckPerformed) {
-        return <Loader/>
+        return dataArr.sort(it => it.isActive ? -1 : 1)
     }
 
     return (
@@ -86,7 +102,7 @@ const App = () => {
                     username: userDetails.username,
                     role: userDetails.role
                 }}>
-                    <BrowserRouter>
+                    <Router history={history}>
 
                         <ToolBar {...AppService.getToolBarProps(
                             isAuthenticated,
@@ -112,6 +128,13 @@ const App = () => {
                                           roles={PathService.roles().home()}>
                                 <HomePage
                                     title="Главная"/>
+                            </RouteWrapper>
+
+                            <RouteWrapper exact path={PathService.newClient()}
+                                          roles={PathService.roles().newClient()}>
+                                <ClientDetails
+                                    title="Новый клиент"
+                                    getData={null}/>
                             </RouteWrapper>
 
                             <RouteWrapper exact path={PathService.clients()}
@@ -162,7 +185,7 @@ const App = () => {
 
                         </Panel>
 
-                    </BrowserRouter>
+                    </Router>
                 </UserDetailsContext.Provider>
             </PathServiceContext.Provider>
         </div>

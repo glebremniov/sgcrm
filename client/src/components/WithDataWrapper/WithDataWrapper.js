@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import Loader from "../Loader/Loader";
 import PropTypes from "prop-types";
@@ -14,19 +14,17 @@ const WithDataWrapper = (props) => {
 
     const {id} = useParams()
 
-    const onSuccess = (data) => {
-        setLoaded(true)
-        setError(false)
-        setData(data)
-    }
-
-    const onError = (error) => {
-        console.error(error)
-        setLoaded(true)
-        setError(true)
-    }
-
-    const getDataWrapper = () => {
+    const getDataWrapper = useCallback(() => {
+        const onSuccess = (data) => {
+            setError(false)
+            setData(data)
+            setLoaded(true)
+        }
+        const onError = (error) => {
+            console.error(error)
+            setError(true)
+            setLoaded(true)
+        }
         if (id) {
             getData(id)
                 .then(onSuccess)
@@ -36,7 +34,7 @@ const WithDataWrapper = (props) => {
                 .then(onSuccess)
                 .catch(onError)
         }
-    }
+    }, [getData, id])
 
     const reload = (newData) => {
         if (newData) {
@@ -47,31 +45,10 @@ const WithDataWrapper = (props) => {
     }
 
     useEffect(() => {
-        const onSuccess = (data) => {
-            setLoaded(true)
-            setError(false)
-            setData(data)
-        }
+        getDataWrapper()
+    }, [getDataWrapper])
 
-        const onError = (error) => {
-            console.error(error)
-            setLoaded(true)
-            setError(true)
-        }
-
-        if (id) {
-            getData(id)
-                .then(onSuccess)
-                .catch(onError)
-        } else {
-            getData()
-                .then(onSuccess)
-                .catch(onError)
-        }
-
-    }, [getData, id])
-
-    if (!hasLoaded || !data) {
+    if (!hasLoaded) {
         return <Loader/>
     }
 
