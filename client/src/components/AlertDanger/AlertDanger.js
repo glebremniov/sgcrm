@@ -9,10 +9,13 @@ const AlertDanger = ({title, text, setShow, redirectPath}) => {
 
     const PathService = useContext(PathServiceContext)
 
+    const isDismissible = typeof setShow !== "undefined"
+    const onClose = isDismissible ? () => setShow(false) : () => {}
+
     return (
         <Alert variant="danger"
-               onClose={() => setShow(false)}
-               dismissible>
+               onClose={onClose}
+               dismissible={isDismissible}>
             <Alert.Heading>
                 <FontAwesomeIcon icon={faExclamationCircle}/> {title}
             </Alert.Heading>
