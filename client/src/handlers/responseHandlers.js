@@ -2,8 +2,8 @@ import Auth from '../services/Auth/AuthService';
 import PathService from "../services/Path/PathService";
 
 export const checkResponseStatus = response => {
-    if (response.status >= 200 && response.status < 300) {
-        return response.json()
+    if (response.ok) {
+        return response
     } else {
         let error = new Error(response.statusText);
         error.response = response;
@@ -12,6 +12,10 @@ export const checkResponseStatus = response => {
 };
 
 export const loginResponseHandler = response => {
-    Auth.writeToken(response);
-    window.location.pathname = PathService.home()
+    response.json()
+        .then(json => {
+            Auth.writeToken(json);
+            window.location.pathname = PathService.home()
+        })
+        .catch(console.error)
 };

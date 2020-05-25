@@ -8,6 +8,7 @@ import ClientPaymentInfo from "../ClientInfo/ClientPaymentInfo";
 import ButtonBar from "../ButtonBar/ButtonBar";
 import ApiService from "../../services/Api/ApiService";
 import AlertSuccess from "../AlertSuccess/AlertSuccess";
+import AlertDanger from "../AlertDanger/AlertDanger";
 
 const ClientDetailsForm = ({data, reload, onMount}) => {
 
@@ -17,12 +18,15 @@ const ClientDetailsForm = ({data, reload, onMount}) => {
         create: 'create'
     }
 
+    const INITIAL_ERROR_STATE = {hasError: false, message: ''}
+
     const [generalInfo, setGeneralInfo] = useState(data)
     const [legalAddressInfo, setLegalAddressInfo] = useState(data.legalAddress)
     const [mailingAddressInfo, setMailingAddressInfo] = useState(data.mailingAddress)
     const [paymentInfo, setPaymentInfo] = useState(data.paymentInfo)
     const [mode, setMode] = useState(modes.show)
     const [showAlertSuccess, setShowAlertSuccess] = useState(false)
+    const [error, setError] = useState(INITIAL_ERROR_STATE)
 
     useEffect(() => {
         onMount(data)
@@ -36,6 +40,10 @@ const ClientDetailsForm = ({data, reload, onMount}) => {
         return Object.entries(obj1).toString() === Object.entries(obj2).toString()
     }
 
+    const hideAlertDanger = () => {
+        setError(INITIAL_ERROR_STATE)
+    }
+
     const clientNotChanged = () =>
         equals(data, generalInfo) &&
         equals(data.legalAddress, legalAddressInfo) &&
@@ -46,15 +54,28 @@ const ClientDetailsForm = ({data, reload, onMount}) => {
     const onSubmitWrapper = (e) => {
         e.preventDefault()
 
-        const onSuccess = (json) => {
+        const onSuccess = (response) => {
+            hideAlertDanger()
             setShowAlertSuccess(true)
             setMode(modes.show)
-            reload()
             window.scrollTo(0, 0)
+            response.json()
+                .then(reload)
         }
 
-        const onError = (error) => {
+        const onError = (e) => {
             console.error(e)
+            if (e.response) {
+                e.response.json()
+                    .then(json => {
+                        console.error(json.message);
+                        setError({
+                            hasError: true,
+                            message: json.message
+                        })
+                    })
+                    .catch(console.error)
+            }
             setShowAlertSuccess(false)
         }
 
@@ -131,6 +152,8 @@ const ClientDetailsForm = ({data, reload, onMount}) => {
         setLegalAddressInfo(data.legalAddress)
         setMailingAddressInfo(data.mailingAddress)
         setPaymentInfo(data.paymentInfo)
+        setShowAlertSuccess(false)
+        hideAlertDanger()
     }
 
     const onInputChange = (target, object) => {
@@ -179,6 +202,13 @@ const ClientDetailsForm = ({data, reload, onMount}) => {
                 showAlertSuccess ? (
                     <AlertSuccess title="Данные успешно сохранены!"
                                   setShow={setShowAlertSuccess}/>
+                ) : null
+            }
+
+            {
+                error.hasError ? (
+                    <AlertDanger text={error.message}
+                                 setShow={hideAlertDanger}/>
                 ) : null
             }
 

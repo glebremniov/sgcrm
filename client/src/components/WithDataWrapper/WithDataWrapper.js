@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import Loader from "../Loader/Loader";
 import PropTypes from "prop-types";
-import Error from "../Error/Error";
+import AlertDanger from "../AlertDanger/AlertDanger";
 
 const WithDataWrapper = (props) => {
 
@@ -38,8 +38,12 @@ const WithDataWrapper = (props) => {
         }
     }
 
-    const reload = () => {
-        getDataWrapper()
+    const reload = (newData) => {
+        if (newData) {
+            setData(newData)
+        } else {
+            getDataWrapper()
+        }
     }
 
     useEffect(() => {
@@ -72,7 +76,7 @@ const WithDataWrapper = (props) => {
     }
 
     if (hasError) {
-        return <Error/>
+        return <AlertDanger/>
     }
 
     return (
