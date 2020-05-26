@@ -31,13 +31,13 @@ const ClientsPage = (props) => {
 
                 <Row>
                     <Col className="text-right">
-                        <Button variant={"outline-secondary"}
+                        <Button variant="primary"
                               className="mr-2">
                             Сортировать по имени <FontAwesomeIcon icon={faLongArrowAltDown}/>
                             <FontAwesomeIcon icon={faLongArrowAltUp}/>
                         </Button>
                         <Link to={PathService.newClient()}
-                              className="btn btn-primary">
+                              className="btn btn-success">
                             Новый клиент
                         </Link>
                     </Col>

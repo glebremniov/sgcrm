@@ -7,17 +7,17 @@ const ButtonBar = ({buttons}) => {
 
     return (
         <div className="float-right">
-            <ButtonGroup aria-label="Basic example">
+            {/*<ButtonGroup aria-label="Basic example">*/}
                 {
                     buttons.map(btn => (
                         <TooltipWrapper key={btn.id} label={btn.tooltip}>
-                            <Button {...btn}>
+                            <Button {...btn} className="ml-2">
                                 <FontAwesomeIcon icon={btn.icon}/> {btn.label}
                             </Button>
                         </TooltipWrapper>
                     ))
                 }
-            </ButtonGroup>
+            {/*</ButtonGroup>*/}
         </div>
     )
 }

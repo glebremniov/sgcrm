@@ -117,7 +117,7 @@ const ClientDetailsForm = ({data, reload, onMount}) => {
             return [
                 {
                     id: 'meeting',
-                    variant: 'outline-primary',
+                    variant: 'primary',
                     type: 'button',
                     icon: faCalendarAlt,
                     tooltip: '',
@@ -126,7 +126,7 @@ const ClientDetailsForm = ({data, reload, onMount}) => {
                 },
                 {
                     id: 'edit',
-                    variant: 'outline-primary',
+                    variant: 'secondary',
                     type: 'button',
                     icon: faPen,
                     tooltip: '',
@@ -146,7 +146,7 @@ const ClientDetailsForm = ({data, reload, onMount}) => {
             return [
                 {
                     id: 'edit',
-                    variant: "primary",
+                    variant: "success",
                     type: "submit",
                     icon: faSave,
                     disabled: clientNotChanged(),

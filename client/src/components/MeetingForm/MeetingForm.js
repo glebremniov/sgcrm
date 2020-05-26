@@ -3,6 +3,7 @@ import "./MeetingForm.css";
 import {Button, Col, Form} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSave} from "@fortawesome/free-solid-svg-icons";
+import {getISODateString} from "../../utils/utils";
 
 const MeetingForm = ({meeting, onSubmit, onChange}) => {
     const {client, date, title} = meeting
@@ -28,6 +29,7 @@ const MeetingForm = ({meeting, onSubmit, onChange}) => {
                                       name="date"
                                       value={date}
                                       required
+                                      min={getISODateString()}
                                       onChange={onChange}
                                       placeholder="Выберите дату и время"/>
                     </Form.Group>
@@ -41,7 +43,7 @@ const MeetingForm = ({meeting, onSubmit, onChange}) => {
                                   onChange={onChange}
                                   placeholder="Введите название встречи"/>
                 </Form.Group>
-                <Button type="submit" variant="outline-primary">
+                <Button type="submit" variant="primary">
                     <FontAwesomeIcon icon={faSave}/> Сохранить
                 </Button>
             </Form>
