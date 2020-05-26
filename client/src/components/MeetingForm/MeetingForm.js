@@ -9,7 +9,7 @@ const MeetingForm = ({meeting, onSubmit, onChange}) => {
     const {client, date, title} = meeting
 
     return (
-        <div className="meeting-form shadow-sm rounded">
+        <div className="meeting-form shadow-m rounded">
             <div className="title">
                 <h4>Новая встреча с клиентом:</h4>
             </div>
@@ -43,7 +43,7 @@ const MeetingForm = ({meeting, onSubmit, onChange}) => {
                                   onChange={onChange}
                                   placeholder="Введите название встречи"/>
                 </Form.Group>
-                <Button type="submit" variant="primary">
+                <Button type="submit" variant="success">
                     <FontAwesomeIcon icon={faSave}/> Сохранить
                 </Button>
             </Form>
