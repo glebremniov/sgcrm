@@ -32,7 +32,7 @@ const ClientsPage = (props) => {
                 <Row>
                     <Col className="text-right">
                         <Button variant="primary"
-                              className="mr-2">
+                                className="mr-2">
                             Сортировать по имени <FontAwesomeIcon icon={faLongArrowAltDown}/>
                             <FontAwesomeIcon icon={faLongArrowAltUp}/>
                         </Button>

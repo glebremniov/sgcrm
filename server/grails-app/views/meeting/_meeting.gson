@@ -1,7 +1,7 @@
 import meeting.Meeting
 
 model {
-	Meeting meeting
+    Meeting meeting
 }
 
 json g.render(meeting, [resolveTemplate: false])
