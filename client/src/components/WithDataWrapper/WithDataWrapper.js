@@ -6,7 +6,7 @@ import AlertDanger from "../AlertDanger/AlertDanger";
 
 const WithDataWrapper = (props) => {
     const {getData, filterData, Component} = props
-    
+
     const {id} = useParams()
 
     const [data, setData] = useState(null)

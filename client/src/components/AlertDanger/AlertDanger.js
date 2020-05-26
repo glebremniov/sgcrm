@@ -10,7 +10,8 @@ const AlertDanger = ({title, text, setShow, redirectPath}) => {
     const PathService = useContext(PathServiceContext)
 
     const isDismissible = typeof setShow !== "undefined"
-    const onClose = isDismissible ? () => setShow(false) : () => {}
+    const onClose = isDismissible ? () => setShow(false) : () => {
+    }
 
     return (
         <Alert variant="danger"

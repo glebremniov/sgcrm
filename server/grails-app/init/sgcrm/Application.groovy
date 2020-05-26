@@ -1,4 +1,4 @@
-package address
+package sgcrm
 
 import grails.boot.GrailsApp
 import grails.boot.config.GrailsAutoConfiguration

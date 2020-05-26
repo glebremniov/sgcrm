@@ -9,7 +9,7 @@ export default {
     getCurrentRole() {
         if (localStorage.auth) {
             const auth = JSON.parse(localStorage.auth);
-            
+
             if (auth && auth.roles) {
                 const {roles} = auth;
                 if (Array.isArray(roles) && roles.length > 0) {

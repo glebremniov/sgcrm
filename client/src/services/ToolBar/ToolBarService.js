@@ -2,7 +2,8 @@ import {
     faBox,
     faCalendarAlt,
     faCog,
-    faHome, faSignInAlt,
+    faHome,
+    faSignInAlt,
     faSignOutAlt,
     faUserTie,
     faWallet

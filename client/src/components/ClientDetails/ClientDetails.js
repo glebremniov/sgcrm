@@ -52,7 +52,6 @@ const ClientDetails = (props) => {
                         onMount={onViewMounted}
                     />
                 }
-
             </div>
         </DefaultPage>
     )

@@ -1,0 +1,5 @@
+.meeting-form {
+    border: .3rem solid var(--orange);
+    margin-top: 2rem;
+    padding: 3rem;
+}

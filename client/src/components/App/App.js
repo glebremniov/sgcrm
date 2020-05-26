@@ -34,8 +34,12 @@ const App = () => {
 
         setLoginRequestSending(true)
 
-        const setDetails = (role, isAuthenticated) => {
+        const setDetails = (role, isAuthenticated, id = null) => {
             let userDetailsDelta = {}
+
+            if (userDetails.id !== id) {
+                userDetailsDelta.id = id
+            }
 
             if (userDetails.role !== role) {
                 userDetailsDelta.role = role
@@ -50,16 +54,21 @@ const App = () => {
             }
         }
 
+        const onError = (e = {}) => {
+            setDetails(RoleService.anonymous(), false)
+            console.error('There has been a problem with your fetch operation: ', e.message);
+        }
+
         if (AuthService.checkIsTokenExists()) {
             AuthService.checkAuthEndpoint()
                 .then(() => {
-                    setDetails(AuthService.getCurrentRole(), true)
+                    ApiService.getCurrentUserId()
+                        .then(({id}) => setDetails(AuthService.getCurrentRole(), true, id))
+                        .catch(onError)
                 })
-                .catch(e => {
-                    setDetails(RoleService.anonymous(), false)
-                    console.error('There has been a problem with your fetch operation: ', e.message);
-                })
+                .catch(onError)
         } else {
+            onError()
             setDetails(RoleService.anonymous(), false)
         }
         setLoginRequestSending(false)
@@ -103,7 +112,7 @@ const App = () => {
             if (a.shortName < b.shortName) {
                 return -1;
             }
-            
+
             return 0;
         })
     }
