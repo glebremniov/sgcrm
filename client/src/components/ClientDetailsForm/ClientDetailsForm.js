@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from "react";
 import {Col, Form, Row} from "react-bootstrap";
-import {faBan, faPen, faSave, faTrashAlt} from "@fortawesome/free-solid-svg-icons";
+import {faBan, faCalendarAlt, faPen, faSave, faTrashAlt} from "@fortawesome/free-solid-svg-icons";
 import WithClientInfoWrapper from "../ClientInfo/WithClientInfoWrapper";
 import ClientGeneralInfo from "../ClientInfo/ClientGeneralInfo";
 import ClientAddressInfo from "../ClientInfo/ClientAddressInfo";
@@ -11,6 +11,8 @@ import AlertSuccess from "../AlertSuccess/AlertSuccess";
 import AlertDanger from "../AlertDanger/AlertDanger";
 import {PathServiceContext} from "../../contexts/PathServiceContext";
 import history from "../../history";
+import {onInputChange} from "../../handlers/inputHandlers";
+import MeetingFormWrapper from "../MeetingFormWrapper/MeetingFormWrapper";
 
 const ClientDetailsForm = ({data, reload, onMount}) => {
 
@@ -30,6 +32,7 @@ const ClientDetailsForm = ({data, reload, onMount}) => {
     const [paymentInfo, setPaymentInfo] = useState(data.paymentInfo)
     const [mode, setMode] = useState(modes.show)
     const [showAlertSuccess, setShowAlertSuccess] = useState(false)
+    const [showMeetingForm, setSetShowMeetingForm] = useState(false)
     const [error, setError] = useState(INITIAL_ERROR_STATE)
 
     useEffect(() => {
@@ -113,6 +116,15 @@ const ClientDetailsForm = ({data, reload, onMount}) => {
         if (isShowMode(mode)) {
             return [
                 {
+                    id: 'meeting',
+                    variant: 'outline-primary',
+                    type: 'button',
+                    icon: faCalendarAlt,
+                    tooltip: '',
+                    label: 'Запланировать встречу',
+                    onClick: () => setSetShowMeetingForm(!showMeetingForm),
+                },
+                {
                     id: 'edit',
                     variant: 'outline-primary',
                     type: 'button',
@@ -164,15 +176,6 @@ const ClientDetailsForm = ({data, reload, onMount}) => {
         hideAlertDanger()
     }
 
-    const onInputChange = (target, object) => {
-        if (object.hasOwnProperty(target.name)) {
-            const objectCopy = {...object}
-            objectCopy[target.name] = target.value
-            return objectCopy
-        }
-        console.error('Unknown property', target.name, object)
-    }
-
     const onGeneralInfoInputChange = ({target}) => {
         const copy = onInputChange(target, generalInfo);
         if (copy) {
@@ -217,6 +220,15 @@ const ClientDetailsForm = ({data, reload, onMount}) => {
                 error.hasError ? (
                     <AlertDanger text={error.message}
                                  setShow={hideAlertDanger}/>
+                ) : null
+            }
+
+            {
+                showMeetingForm ? (
+                    <MeetingFormWrapper client={generalInfo}
+                                        showSuccessAlert={setShowAlertSuccess}
+                                        showErrorAlert={setError}
+                                        setShow={setSetShowMeetingForm}/>
                 ) : null
             }
 

@@ -1,5 +1,6 @@
-package address
+package sgcrm
 
+import address.Address
 import client.Client
 import com.neovisionaries.i18n.CountryCode
 import enums.client.ClientType

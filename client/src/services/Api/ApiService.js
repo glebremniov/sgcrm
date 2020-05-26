@@ -10,6 +10,10 @@ export default {
         }
     },
 
+    getCurrentUserId() {
+        return _getResource(buildUri('/api/currentUserId'))
+    },
+
     getClients() {
         return _getResource(buildUri('/api/client'))
     },
@@ -30,6 +34,13 @@ export default {
             method: 'put',
             body: JSON.stringify(client)
         }).then(checkResponseStatus)
+    },
+
+    saveMeeting(meeting) {
+        return fetchWrapper(buildUri('/api/meeting'), {
+            method: 'post',
+            body: JSON.stringify(meeting)
+        }).then(checkResponseStatus)
     }
 };
 
@@ -46,7 +57,6 @@ export const fetchWrapper = async function (uri, init = {}) {
 const _getResource = async (uri) => {
     try {
         const response = await fetchWrapper(uri)
-
         return response.json()
     } catch (e) {
         throw e

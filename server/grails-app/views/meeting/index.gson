@@ -1,0 +1,8 @@
+import meeting.Meeting
+
+model {
+	Iterable<Meeting> meetingList
+}
+
+json tmpl.meeting(meetingList ?: [])
+

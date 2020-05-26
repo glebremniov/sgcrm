@@ -1,5 +1,6 @@
-package address
+package sgcrm
 
+import grails.converters.JSON
 import grails.core.GrailsApplication
 import grails.plugin.springsecurity.annotation.Secured
 import grails.plugins.GrailsPluginManager
@@ -18,5 +19,10 @@ class ApplicationController implements PluginManagerAware {
     @Secured(value = ['isAuthenticated()'])
     def checkAuth() {
         render(status: HttpStatus.OK)
+    }
+
+    @Secured(value = ['isAuthenticated()'])
+    def currentUserId() {
+        render([id: authenticatedUser?.id] as JSON)
     }
 }
