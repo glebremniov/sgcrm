@@ -18,9 +18,10 @@ import HomePage from "../HomePage/HomePage";
 import ClientDetails from "../ClientDetails/ClientDetails";
 import RoleService from "../../services/Role/RoleService";
 import {PathServiceContext} from "../../contexts/PathServiceContext";
-import {faBox, faCalendarAlt, faCog} from "@fortawesome/free-solid-svg-icons";
+import {faBox, faCog} from "@fortawesome/free-solid-svg-icons";
 import history from "../../history";
 import {defaultErrorHandler} from "../../handlers/errorHandlers";
+import CalendarPage from "../CalendarPage/CalendarPage";
 
 const App = () => {
 
@@ -181,13 +182,8 @@ const App = () => {
 
                             <RouteWrapper path={PathService.calendar()}
                                           roles={PathService.roles().calendar()}>
-                                <DefaultPage
-                                    title="Календарь"
-                                    icon={faCalendarAlt}
-                                    breadcrumbItems={[
-                                        PathService.breadcrumbs().home(),
-                                        PathService.breadcrumbs().calendar()
-                                    ]}/>
+                                <CalendarPage
+                                    title="Календарь"/>
                             </RouteWrapper>
 
                             <RouteWrapper path={PathService.settings()}

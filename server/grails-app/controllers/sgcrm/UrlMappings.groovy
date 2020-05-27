@@ -17,7 +17,7 @@ class UrlMappings {
         put "/api/$controller/$id(.$format)?"(action: "update")
         patch "/api/$controller/$id(.$format)?"(action: "patch")
 
-        "/api/meeting/indexByUser"(controller: 'meeting', action: 'indexByUser')
+        "/api/meeting/indexByUser/$userId"(controller: 'meeting', action: 'indexByUser')
         "/api/checkAuth"(controller: 'application', action: 'checkAuth')
         "/api/currentUserId"(controller: 'application', action: 'currentUserId')
 
