@@ -179,8 +179,8 @@ const App = () => {
                                     ]}/>
                             </RouteWrapper>
 
-                            <RouteWrapper path={PathService.workers()}
-                                          roles={PathService.roles().workers()}>
+                            <RouteWrapper path={PathService.calendar()}
+                                          roles={PathService.roles().calendar()}>
                                 <DefaultPage
                                     title="Календарь"
                                     icon={faCalendarAlt}

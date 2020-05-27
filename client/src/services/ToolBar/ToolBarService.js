@@ -5,7 +5,6 @@ import {
     faHome,
     faSignInAlt,
     faSignOutAlt,
-    faUserTie,
     faWallet
 } from "@fortawesome/free-solid-svg-icons";
 import PathService from "../Path/PathService";
@@ -49,7 +48,6 @@ export default class ToolBarService {
             HOME: 'home',
             CLIENTS: 'clients',
             OPERATIONS: 'operations',
-            WORKERS: 'workers',
             CALENDAR: 'calendar',
         }
 
@@ -73,12 +71,6 @@ export default class ToolBarService {
                 faIcon: faBox,
             },
             {
-                id: ids.WORKERS,
-                label: 'Сотрудники',
-                href: PathService.workers(),
-                faIcon: faUserTie,
-            },
-            {
                 id: ids.CALENDAR,
                 label: 'Календарь',
                 href: PathService.calendar(),
@@ -91,8 +83,8 @@ export default class ToolBarService {
                 return this.filterItemsByIds(items,
                     ids.HOME,
                     ids.CLIENTS,
-                    ids.OPERATIONS,
-                    ids.WORKERS)
+                    ids.CALENDAR,
+                    ids.OPERATIONS)
             case RoleService.manager():
                 return this.filterItemsByIds(items,
                     ids.HOME,
