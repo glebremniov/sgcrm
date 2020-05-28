@@ -4,4 +4,4 @@ model {
     Meeting meeting
 }
 
-json g.render(meeting, [resolveTemplate: false])
+json g.render(meeting, [resolveTemplate: false, deep: true])
