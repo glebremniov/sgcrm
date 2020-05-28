@@ -36,6 +36,10 @@ export default {
         }).then(checkResponseStatus)
     },
 
+    getMeetings(userId) {
+        return _getResource(buildUri(`/api/meeting/indexByUser/${userId}`))
+    },
+
     saveMeeting(meeting) {
         return fetchWrapper(buildUri('/api/meeting'), {
             method: 'post',

@@ -46,13 +46,6 @@ const _PATH_DATA = {
             RoleService.manager(),
         ],
     },
-    WORKERS: {
-        path: HOME_PATH + "/workers/",
-        roles: [
-            RoleService.admin(),
-            RoleService.manager(),
-        ],
-    },
     CALENDAR: {
         path: HOME_PATH + "/calendar/",
         roles: [
@@ -87,8 +80,7 @@ export default {
     newClient: () => _PATH_DATA.NEW_CLIENT.path,
     client: () => _PATH_DATA.CLIENT.path,
     operations: () => _PATH_DATA.OPERATIONS.path,
-    workers: () => _PATH_DATA.WORKERS.path,
-    calendar: () => _PATH_DATA.WORKERS.path,
+    calendar: () => _PATH_DATA.CALENDAR.path,
     settings: () => _PATH_DATA.SETTINGS.path,
     login: () => _PATH_DATA.LOGIN.path,
 
@@ -102,8 +94,7 @@ export default {
             newClient: () => _PATH_DATA.NEW_CLIENT.roles,
             client: () => _PATH_DATA.CLIENT.roles,
             operations: () => _PATH_DATA.OPERATIONS.roles,
-            workers: () => _PATH_DATA.WORKERS.roles,
-            calendar: () => _PATH_DATA.WORKERS.roles,
+            calendar: () => _PATH_DATA.CALENDAR.roles,
             settings: () => _PATH_DATA.SETTINGS.roles,
             login: () => _PATH_DATA.LOGIN.roles,
         }
@@ -139,12 +130,6 @@ export default {
                 return {
                     label: 'Операции',
                     href: _PATH_DATA.OPERATIONS.path,
-                }
-            },
-            workers: () => {
-                return {
-                    label: 'Сотрудники',
-                    href: _PATH_DATA.WORKERS.path,
                 }
             },
             calendar: () => {

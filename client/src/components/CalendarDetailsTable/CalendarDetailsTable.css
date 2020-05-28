@@ -1,0 +1,11 @@
+.calendar-details-table {
+
+}
+
+.calendar-details-table table {
+    border-radius: var(--main-border-radius-d);
+}
+
+.calendar-details-table table a {
+    font-weight: bold;
+}

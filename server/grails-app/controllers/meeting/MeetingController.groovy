@@ -13,6 +13,6 @@ class MeetingController extends RestfulController {
     }
 
     def indexByUser() {
-        respond Meeting.findAllByUser(getAuthenticatedUser() as User)
+        respond Meeting.findAllByUser(User.read(params.userId))
     }
 }
