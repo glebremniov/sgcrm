@@ -1,23 +1,25 @@
 import PathService from "../Path/PathService";
 import ToolBarService from "../ToolBar/ToolBarService";
 import RoleService from "../Role/RoleService";
+import AuthService from "../Auth/AuthService";
 
 const toolBarService = new ToolBarService();
 
 export default {
-    getToolBarProps(isAuthenticated, userDetails, appInfo, logoutHandler) {
+    getToolBarProps(userDetails, appInfo, logoutHandler) {
         const topItems = toolBarService.getTopToolBarItems(userDetails.role)
         const bottomItems = toolBarService.getBottomToolBarItems(userDetails.role)
-        const logOutItemProps = toolBarService.getToolBarLogOutItemProps(logoutHandler)
+        const logoutItemProps = toolBarService.getLogoutItemProps(logoutHandler)
+        const loginItemProps = toolBarService.getLoginItemProps(PathService.login())
 
         return {
             brandItemProps: {
                 appName: appInfo.name.toLowerCase(),
             },
-            logOutItemProps,
+            logoutItemProps,
+            loginItemProps,
             topItems,
             bottomItems,
-            isAuthenticated,
             statusBarProps: {
                 appInfo,
             },
@@ -38,7 +40,8 @@ export default {
         return {
             username: '',
             password: '',
-            role: RoleService.anonymous()
+            role: AuthService.getCurrentRole() || RoleService.anonymous(),
+            isAuthenticated: false
         }
     },
 

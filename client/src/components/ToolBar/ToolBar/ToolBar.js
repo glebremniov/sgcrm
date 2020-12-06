@@ -1,30 +1,34 @@
-import React from "react";
+import React, {useContext} from "react";
 import "./ToolBar.css"
 import PropTypes from 'prop-types';
 import ToolBarItem from "../ToolBarItem/ToolBarItem";
 import ToolBarBrandItem from "../ToolBarBrandItem/ToolBarBrandItem";
-import ToolBarLogOutItem from "../ToolBarLogOutItem/ToolBarLogOutItem";
+import ToolbarAuthenticationItem from "../ToolBarLogOutItem/ToolbarAuthenticationItem";
 import {useLocation} from "react-router-dom";
 import StatusBar from "../../StatusBar/StatusBar";
+import {UserDetailsContext} from "../../../contexts/UserDetailsContext";
 
 const ToolBar = (props) => {
 
     const {
         brandItemProps,
-        logOutItemProps,
+        loginItemProps,
+        logoutItemProps,
         statusBarProps,
         topItems,
         bottomItems,
-        isAuthenticated,
         isPathActive,
     } = props;
 
     const activePath = useLocation().pathname;
+    const userDetails = useContext(UserDetailsContext)
 
     const transformToolBarItems = (toolBarItems) =>
         toolBarItems.map(itemProps =>
             <ToolBarItem key={itemProps.id} {...itemProps} isActive={isPathActive(itemProps.href, activePath)}/>
         );
+
+    const authenticationItemProps = userDetails.isAuthenticated ? logoutItemProps : loginItemProps
 
     return (
         <div className="vertical-menu shadow">
@@ -37,9 +41,9 @@ const ToolBar = (props) => {
                 {
                     transformToolBarItems(bottomItems)
                 }
-                {
-                    isAuthenticated ? <ToolBarLogOutItem {...logOutItemProps}/> : null
-                }
+
+                <ToolbarAuthenticationItem {...authenticationItemProps}/>
+
                 <StatusBar {...statusBarProps}/>
             </div>
         </div>

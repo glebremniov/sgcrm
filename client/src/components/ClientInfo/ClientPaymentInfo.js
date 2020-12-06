@@ -15,8 +15,8 @@ const ClientPaymentInfo = ({data, onInputChange, readonly}) => {
                                   placeholder="Введите наименование банка"/>
                 </Form.Group>
 
-                <Form.Group as={Col} lg={4} controlId="bankIdentificationCode">
-                    <Form.Label>БИК</Form.Label>
+                <Form.Group as={Col} lg={6} sm={12} controlId="bankIdentificationCode">
+                    <Form.Label>Банковский Идентификационный Код (БИК)</Form.Label>
                     <Form.Control name="bankIdentificationCode"
                                   required
                                   value={data.bankIdentificationCode}
@@ -27,16 +27,6 @@ const ClientPaymentInfo = ({data, onInputChange, readonly}) => {
             </Form.Row>
 
             <Form.Row>
-                <Form.Group as={Col} controlId="payerAccountNumber">
-                    <Form.Label>Уникальный номер плательщика (УНП)</Form.Label>
-                    <Form.Control name="payerAccountNumber"
-                                  required
-                                  value={data.payerAccountNumber}
-                                  disabled={readonly}
-                                  onChange={onInputChange}
-                                  placeholder="Введите УНП"/>
-                </Form.Group>
-
                 <Form.Group as={Col} controlId="checkingAccountNumber">
                     <Form.Label>Рассчетный счёт</Form.Label>
                     <Form.Control name="checkingAccountNumber"
@@ -45,6 +35,16 @@ const ClientPaymentInfo = ({data, onInputChange, readonly}) => {
                                   disabled={readonly}
                                   onChange={onInputChange}
                                   placeholder="Введите рассчетный счёт"/>
+                </Form.Group>
+
+                <Form.Group as={Col} lg={6} sm={12} controlId="payerAccountNumber">
+                    <Form.Label>Уникальный Номер Плательщика (УНП)</Form.Label>
+                    <Form.Control name="payerAccountNumber"
+                                  required
+                                  value={data.payerAccountNumber}
+                                  disabled={readonly}
+                                  onChange={onInputChange}
+                                  placeholder="Введите УНП"/>
                 </Form.Group>
             </Form.Row>
         </div>

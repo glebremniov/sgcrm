@@ -3,14 +3,36 @@ import {
     faCalendarAlt,
     faCog,
     faHome,
+    faSignInAlt,
     faSignOutAlt,
-    faUserTie,
     faWallet
 } from "@fortawesome/free-solid-svg-icons";
 import PathService from "../Path/PathService";
 import RoleService from "../Role/RoleService";
+import history from "../../history";
 
 export default class ToolBarService {
+
+    getLoginItemProps = (href, label = 'Войти') => {
+        return {
+            id: 'authenticationItem',
+            label,
+            faIcon: faSignInAlt,
+            onClick: () => history.push(href),
+            className: 'login'
+        }
+    }
+
+    getLogoutItemProps = (onLogOut, label = 'Выйти') => {
+        return {
+            id: 'logout',
+            label,
+            faIcon: faSignOutAlt,
+            onClick: onLogOut,
+            className: 'logout',
+        }
+    };
+
     getToolBarLogOutItemProps = (onLogOut, label = 'Выйти') => {
         return {
             id: 'logout',
@@ -26,7 +48,6 @@ export default class ToolBarService {
             HOME: 'home',
             CLIENTS: 'clients',
             OPERATIONS: 'operations',
-            WORKERS: 'workers',
             CALENDAR: 'calendar',
         }
 
@@ -50,12 +71,6 @@ export default class ToolBarService {
                 faIcon: faBox,
             },
             {
-                id: ids.WORKERS,
-                label: 'Сотрудники',
-                href: PathService.workers(),
-                faIcon: faUserTie,
-            },
-            {
                 id: ids.CALENDAR,
                 label: 'Календарь',
                 href: PathService.calendar(),
@@ -68,8 +83,8 @@ export default class ToolBarService {
                 return this.filterItemsByIds(items,
                     ids.HOME,
                     ids.CLIENTS,
-                    ids.OPERATIONS,
-                    ids.WORKERS)
+                    ids.CALENDAR,
+                    ids.OPERATIONS)
             case RoleService.manager():
                 return this.filterItemsByIds(items,
                     ids.HOME,
@@ -85,7 +100,7 @@ export default class ToolBarService {
     }
 
     getBottomToolBarItems = (role) => {
-        return role ? [
+        return role !== RoleService.anonymous() ? [
             {
                 id: 'settings',
                 label: 'Настройки',

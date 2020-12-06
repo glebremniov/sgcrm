@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {Col, Form, Row} from "react-bootstrap";
-import {faBan, faPen, faSave, faTrashAlt} from "@fortawesome/free-solid-svg-icons";
+import {faBan, faCalendarAlt, faPen, faSave, faTrashAlt} from "@fortawesome/free-solid-svg-icons";
 import WithClientInfoWrapper from "../ClientInfo/WithClientInfoWrapper";
 import ClientGeneralInfo from "../ClientInfo/ClientGeneralInfo";
 import ClientAddressInfo from "../ClientInfo/ClientAddressInfo";
@@ -8,8 +8,15 @@ import ClientPaymentInfo from "../ClientInfo/ClientPaymentInfo";
 import ButtonBar from "../ButtonBar/ButtonBar";
 import ApiService from "../../services/Api/ApiService";
 import AlertSuccess from "../AlertSuccess/AlertSuccess";
+import AlertDanger from "../AlertDanger/AlertDanger";
+import {PathServiceContext} from "../../contexts/PathServiceContext";
+import history from "../../history";
+import {onInputChange} from "../../handlers/inputHandlers";
+import MeetingFormWrapper from "../MeetingFormWrapper/MeetingFormWrapper";
 
 const ClientDetailsForm = ({data, reload, onMount}) => {
+
+    const PathService = useContext(PathServiceContext)
 
     const modes = {
         show: 'show',
@@ -17,16 +24,23 @@ const ClientDetailsForm = ({data, reload, onMount}) => {
         create: 'create'
     }
 
+    const INITIAL_ERROR_STATE = {hasError: false, message: ''}
+
     const [generalInfo, setGeneralInfo] = useState(data)
     const [legalAddressInfo, setLegalAddressInfo] = useState(data.legalAddress)
     const [mailingAddressInfo, setMailingAddressInfo] = useState(data.mailingAddress)
     const [paymentInfo, setPaymentInfo] = useState(data.paymentInfo)
     const [mode, setMode] = useState(modes.show)
     const [showAlertSuccess, setShowAlertSuccess] = useState(false)
+    const [showMeetingForm, setSetShowMeetingForm] = useState(false)
+    const [error, setError] = useState(INITIAL_ERROR_STATE)
 
     useEffect(() => {
         onMount(data)
-    }, [onMount, data])
+        if (!data.id && mode !== modes.create) {
+            setMode(modes.create)
+        }
+    }, [onMount, data, mode, modes.create])
 
     const isShowMode = (modeName) => modes[modeName] && modes[modeName] === modes.show
     const isEditMode = (modeName) => modes[modeName] && modes[modeName] === modes.edit
@@ -34,6 +48,10 @@ const ClientDetailsForm = ({data, reload, onMount}) => {
 
     const equals = (obj1, obj2) => {
         return Object.entries(obj1).toString() === Object.entries(obj2).toString()
+    }
+
+    const hideAlertDanger = () => {
+        setError(INITIAL_ERROR_STATE)
     }
 
     const clientNotChanged = () =>
@@ -46,15 +64,28 @@ const ClientDetailsForm = ({data, reload, onMount}) => {
     const onSubmitWrapper = (e) => {
         e.preventDefault()
 
-        const onSuccess = (json) => {
+        const onSuccess = (response) => {
+            hideAlertDanger()
             setShowAlertSuccess(true)
             setMode(modes.show)
-            reload()
             window.scrollTo(0, 0)
+            response.json()
+                .then(reload)
         }
 
-        const onError = (error) => {
+        const onError = (e) => {
             console.error(e)
+            if (e.response) {
+                e.response.json()
+                    .then(json => {
+                        console.error(json.message);
+                        setError({
+                            hasError: true,
+                            message: json.message
+                        })
+                    })
+                    .catch(console.error)
+            }
             setShowAlertSuccess(false)
         }
 
@@ -67,9 +98,10 @@ const ClientDetailsForm = ({data, reload, onMount}) => {
             }
 
             if (isCreateMode(mode)) {
-                console.debug('post')
                 ApiService.saveClient(client)
-                    .then(onSuccess)
+                    .then(response => response.json()
+                        .then(({id}) =>
+                            history.push(PathService.buildPathToClient(id))))
                     .catch(onError)
 
             } else if (isEditMode(mode)) {
@@ -84,8 +116,17 @@ const ClientDetailsForm = ({data, reload, onMount}) => {
         if (isShowMode(mode)) {
             return [
                 {
+                    id: 'meeting',
+                    variant: 'primary',
+                    type: 'button',
+                    icon: faCalendarAlt,
+                    tooltip: '',
+                    label: 'Запланировать встречу',
+                    onClick: () => setSetShowMeetingForm(!showMeetingForm),
+                },
+                {
                     id: 'edit',
-                    variant: 'outline-primary',
+                    variant: 'secondary',
                     type: 'button',
                     icon: faPen,
                     tooltip: '',
@@ -105,7 +146,7 @@ const ClientDetailsForm = ({data, reload, onMount}) => {
             return [
                 {
                     id: 'edit',
-                    variant: "primary",
+                    variant: "success",
                     type: "submit",
                     icon: faSave,
                     disabled: clientNotChanged(),
@@ -131,15 +172,8 @@ const ClientDetailsForm = ({data, reload, onMount}) => {
         setLegalAddressInfo(data.legalAddress)
         setMailingAddressInfo(data.mailingAddress)
         setPaymentInfo(data.paymentInfo)
-    }
-
-    const onInputChange = (target, object) => {
-        if (object.hasOwnProperty(target.name)) {
-            const objectCopy = {...object}
-            objectCopy[target.name] = target.value
-            return objectCopy
-        }
-        console.error('Unknown property', target.name, object)
+        setShowAlertSuccess(false)
+        hideAlertDanger()
     }
 
     const onGeneralInfoInputChange = ({target}) => {
@@ -179,6 +213,22 @@ const ClientDetailsForm = ({data, reload, onMount}) => {
                 showAlertSuccess ? (
                     <AlertSuccess title="Данные успешно сохранены!"
                                   setShow={setShowAlertSuccess}/>
+                ) : null
+            }
+
+            {
+                error.hasError ? (
+                    <AlertDanger text={error.message}
+                                 setShow={hideAlertDanger}/>
+                ) : null
+            }
+
+            {
+                showMeetingForm ? (
+                    <MeetingFormWrapper client={generalInfo}
+                                        showSuccessAlert={setShowAlertSuccess}
+                                        showErrorAlert={setError}
+                                        setShow={setSetShowMeetingForm}/>
                 ) : null
             }
 
@@ -227,6 +277,34 @@ const ClientDetailsForm = ({data, reload, onMount}) => {
             </Form>
         </div>
     )
+}
+
+ClientDetailsForm.defaultProps = {
+    data: {
+        shortName: "",
+        fullName: "",
+        phone: "",
+        email: "",
+        fax: "",
+        legalAddress: {
+            addressString: "",
+            city: "",
+            countryISO2code: "BY",
+            postcode: "",
+        },
+        mailingAddress: {
+            addressString: "",
+            city: "",
+            countryISO2code: "BY",
+            postcode: "",
+        },
+        paymentInfo: {
+            bankIdentificationCode: "",
+            bankName: "",
+            checkingAccountNumber: "",
+            payerAccountNumber: "",
+        }
+    }
 }
 
 export default ClientDetailsForm

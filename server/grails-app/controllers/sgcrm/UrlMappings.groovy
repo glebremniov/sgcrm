@@ -1,4 +1,4 @@
-package address
+package sgcrm
 
 class UrlMappings {
 
@@ -17,7 +17,9 @@ class UrlMappings {
         put "/api/$controller/$id(.$format)?"(action: "update")
         patch "/api/$controller/$id(.$format)?"(action: "patch")
 
+        "/api/meeting/indexByUser/$userId"(controller: 'meeting', action: 'indexByUser')
         "/api/checkAuth"(controller: 'application', action: 'checkAuth')
+        "/api/currentUserId"(controller: 'application', action: 'currentUserId')
 
         "/"(controller: 'application', action: 'index')
         "500"(view: '/error')

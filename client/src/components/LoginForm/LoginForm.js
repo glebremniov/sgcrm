@@ -31,7 +31,7 @@ const LoginForm = (props) => {
                                       autoComplete="username"
                                       placeholder="Имя пользователя"/>
                         <Form.Text className="text-muted">
-                            Мы заботимся о конфеденциальности Ваших данных.
+                            Мы заботимся о конфиденциальности Ваших данных.
                         </Form.Text>
                     </Form.Group>
 

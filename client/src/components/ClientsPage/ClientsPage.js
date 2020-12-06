@@ -6,13 +6,16 @@ import RowDataTransformer from "../RowDataContainer/RowDataTransformer";
 import PropTypes from "prop-types";
 import WithDataWrapper from "../WithDataWrapper/WithDataWrapper";
 import {PathServiceContext} from "../../contexts/PathServiceContext";
-import {faWallet} from "@fortawesome/free-solid-svg-icons";
+import {faLongArrowAltDown, faLongArrowAltUp, faWallet} from "@fortawesome/free-solid-svg-icons";
+import {Link} from "react-router-dom";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {Button, Col, Row} from "react-bootstrap";
 
 const ClientsPage = (props) => {
     const {
         title,
         filterData,
-        getData
+        getData,
     } = props
 
     const PathService = useContext(PathServiceContext)
@@ -25,6 +28,20 @@ const ClientsPage = (props) => {
                          PathService.breadcrumbs().clients(),
                      ]}>
             <div className="clients-page">
+
+                <Row>
+                    <Col className="text-right">
+                        <Button variant="primary"
+                                className="mr-2">
+                            Сортировать по имени <FontAwesomeIcon icon={faLongArrowAltDown}/>
+                            <FontAwesomeIcon icon={faLongArrowAltUp}/>
+                        </Button>
+                        <Link to={PathService.newClient()}
+                              className="btn btn-success">
+                            Новый клиент
+                        </Link>
+                    </Col>
+                </Row>
 
                 <WithDataWrapper
                     getData={getData}
